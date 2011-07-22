@@ -1,7 +1,9 @@
 Tascit::Application.routes.draw do
+<<<<<<< HEAD
   resources :lists
-
+=======
   resources :owners
+>>>>>>> bd60ba6860aeacd224ef4759afd2d5867d9bdc30
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
