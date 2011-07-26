@@ -12,11 +12,17 @@
 
 <p>
 	<b>Tasks</b>
-	<ul>
-	<% @list.tasks.each do |t| %>
-		<li><%= t.description %></li>
+	<% @list.tasks.each do |t|%>
+		<% if t.status == false %>
+		    <%= check_box_tag t.id, true, checked = false   %>
+		    <%= observe_field t.id, :url => { :controller => 'tasks', :action => :finish , :id => t.id },
+		        :frequency => 0.25,
+		        :update => :status,
+		        :with => true
+		    %>
+		<% end %>
+		<%= link_to t.description , t %>
 	<% end %>
-	</ul>
 </p>
 
 <%= link_to 'Edit', edit_list_path(@list) %> |
