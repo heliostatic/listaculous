@@ -6,9 +6,11 @@
 </p>
 
 <p>
-  <b>Name:</b>
+  <b>Lists:</b>
   <% @owner.lists.each do |l| %>
+	<br />
 	<%= link_to l.name, l %>
+	(<%= l.tasks.length%>)
   <% end %>
 </p>
 
