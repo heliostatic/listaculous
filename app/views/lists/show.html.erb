@@ -13,6 +13,7 @@
 <p>
 	<b>Tasks</b>
 	<% @list.tasks.each do |t|%>
+		<br />
 		<% if t.status == false %>
 		    <%= check_box_tag t.id, true, checked = false   %>
 		    <%= observe_field t.id, :url => { :controller => 'tasks', :action => :finish , :id => t.id },
