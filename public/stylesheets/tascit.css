@@ -26,3 +26,8 @@ li {
 	height:35px;
 	width:35px;
 }
+
+.overlay_trigger {
+    text-decoration:underline;
+    cursor:pointer;
+}
