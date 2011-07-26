@@ -80,4 +80,14 @@ class ListsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def finish
+    @task = List.tasks[params[:id]]
+    new = {:status => true}
+    @task.update_attributes(new)
+
+    respond_to do |format|
+      format.js
+    end
+   end
 end
