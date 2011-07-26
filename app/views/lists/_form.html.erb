@@ -15,10 +15,16 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+	<% if not params[:owner_id] %>
   <div class="field">
     <%= f.label :owner_id %><br />
     <%= f.text_field :owner_id %>
   </div>
+  <% else %>
+		<div class="field">
+	    <%= f.hidden_field :owner_id, {:value => params[:owner_id]} %>
+		</div>
+	<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

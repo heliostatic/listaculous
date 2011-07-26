@@ -6,6 +6,7 @@
 </p>
 
 <p>
+	<p><%= link_to "New List", :controller => "lists", :action => "new", :owner_id => @owner.id %></p>
   <b>Lists:</b>
   <% @owner.lists.each do |l| %>
 	<br />
