@@ -5,6 +5,13 @@
   <%= @owner.name %>
 </p>
 
+<p>
+  <b>Name:</b>
+  <% @owner.lists.each do |l| %>
+	<%= link_to l.name, l %>
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_owner_path(@owner) %> |
 <%= link_to 'Back', owners_path %>
