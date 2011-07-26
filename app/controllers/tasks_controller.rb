@@ -80,4 +80,13 @@ class TasksController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def finish
+    @task = Task.find(params[:id])
+    new = {:status => true}
+    @task.update_attributes(new)
+    render :update do |page|
+      page.replace_html title, "updated"
+    end
+   end
 end
