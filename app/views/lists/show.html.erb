@@ -16,18 +16,6 @@
 	<b>Tasks</b>
 	<ul>
 	<% @list.tasks.each do |t|%>
-<<<<<<< HEAD
-		<br />
-		<% if t.status == false %>
-		    <%= check_box_tag t.id, true, checked = false   %>
-		    <%= observe_field t.id, :url => { :controller => 'tasks', :action => :finish , :id => t.id },
-		        :frequency => 0.25,
-		        :update => :status,
-		        :with => true
-		    %>
-		<% end %>
-		<%= link_to t.description , t %>
-=======
 		<li>
 			<% if t.status == "unfinished" %>
 			    <%= check_box_tag t.id, true, checked = false, {:class => 'task'} %>
@@ -36,7 +24,6 @@
 			<% end %>
 			<%= link_to t.description , t %>
 		</li>
->>>>>>> I think this would do something if we had jquery and got rid of prototype. Not entirely sure. We get checkboxes now, though.
 	<% end %>
 	</ul>
 </p>
