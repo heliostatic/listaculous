@@ -1,20 +1,17 @@
+<h1>Details for <%= @owner.name %></h1>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @owner.name %>
-</p>
-
-<p>
-	<p><%= link_to "New List", :controller => "lists", :action => "new", :owner_id => @owner.id %></p>
-  <b>Lists:</b>
+<div id="lists">
+	<h2>Lists:</h2>
+	<div id="new_list"><%= link_to "New List", :controller => "lists", :action => "new", :owner_id => @owner.id %></div>
   <% @owner.lists.each do |l| %>
-	<br />
+	<div class="name">
 	<%= link_to l.name, l %>
-	(<%= l.tasks.length - l.tasks.where(:status => "Finished").length %>) <%= l.tasks.length%>
+	</div>
+	<div class="numbers"><span class="unfinished">(<%= l.tasks.length - l.tasks.where(:status => "Finished").length %>)</span> <span class="finished"><%= l.tasks.length%></span></div>
   <% end %>
-</p>
+</div>
 
-
+<p>
 <%= link_to 'Edit', edit_owner_path(@owner) %> |
 <%= link_to 'Back', owners_path %>
+</p>
