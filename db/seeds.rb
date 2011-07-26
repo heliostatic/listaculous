@@ -7,4 +7,5 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 owners = Owner.create([{ :name => 'Ben'}, {:name => "Ian"}])
-lists = List.create([{ :}])
+lists = List.create([{ :name => "Hello", :owner_id => 1 }, { :name => "Goodbye", :owner_id => 2 }])
+tasks = Task.create([{:description => "Task 1", :status => "true", :list_id => 1}])
