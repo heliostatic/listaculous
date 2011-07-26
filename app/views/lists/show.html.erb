@@ -13,7 +13,7 @@
 <p>
 	<b>Tasks</b>
 	<ul>
-	<% @list.tasks each do |t| %>
+	<% @list.tasks.each do |t| %>
 		<li><%= t.description %></li>
 	<% end %>
 	</ul>
