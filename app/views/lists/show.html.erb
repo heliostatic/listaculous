@@ -10,6 +10,14 @@
   <%= @list.owner_id %>
 </p>
 
+<p>
+	<b>Tasks</b>
+	<ul>
+	<% @list.tasks each do |t| %>
+		<li><%= t.description %></li>
+	<% end %>
+	</ul>
+</p>
 
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>

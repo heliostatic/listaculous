@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+owners = Owner.create([{ :name => 'Ben'}, {:name => "Ian"}])
+lists = List.create([{ :}])
