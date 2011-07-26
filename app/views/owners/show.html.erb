@@ -10,7 +10,7 @@
   <% @owner.lists.each do |l| %>
 	<br />
 	<%= link_to l.name, l %>
-	(<%= l.tasks.length%>)
+	(<%= l.tasks.length - l.tasks.where(:status => "Finished").length %>) <%= l.tasks.length%>
   <% end %>
 </p>
 
