@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<div id="worked"></div>
+
 <p>
   <b>Name:</b>
   <%= @list.name %>
@@ -12,7 +14,9 @@
 
 <p>
 	<b>Tasks</b>
+	<ul>
 	<% @list.tasks.each do |t|%>
+<<<<<<< HEAD
 		<br />
 		<% if t.status == false %>
 		    <%= check_box_tag t.id, true, checked = false   %>
@@ -23,7 +27,18 @@
 		    %>
 		<% end %>
 		<%= link_to t.description , t %>
+=======
+		<li>
+			<% if t.status == "unfinished" %>
+			    <%= check_box_tag t.id, true, checked = false, {:class => 'task'} %>
+			<% else %>
+				<%= check_box_tag t.id, true, checked = true, {:class => 'task'} %>
+			<% end %>
+			<%= link_to t.description , t %>
+		</li>
+>>>>>>> I think this would do something if we had jquery and got rid of prototype. Not entirely sure. We get checkboxes now, though.
 	<% end %>
+	</ul>
 </p>
 
 <%= link_to 'Edit', edit_list_path(@list) %> |

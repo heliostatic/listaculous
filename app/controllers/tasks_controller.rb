@@ -85,8 +85,9 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     new = {:status => true}
     @task.update_attributes(new)
-    render :update do |page|
-      page.replace_html title, "updated"
+
+    respond_to do |format|
+      format.js
     end
    end
 end
