@@ -18,7 +18,7 @@
 <div rel="#new_task">Open New Overlay</div>
 <div class="overlay" id="new_task">
 	Create a new task here.
-	<%= render :partial => "lists/form", :locals => {:@list => List.new} %>
+	<%= render :partial => "lists/form", :locals => {:@list => List.new, :params=> {:owner_id => @owner.id}}  %>
 </div>
 <script>
 $("div[rel]").overlay();
