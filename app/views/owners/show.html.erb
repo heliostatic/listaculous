@@ -15,7 +15,7 @@
 <%= link_to 'Edit', edit_owner_path(@owner) %> |
 <%= link_to 'Back', owners_path %>
 </p>
-<div class="overlay_trigger" rel="#new_task">Open New Overlay</div>
+<div class="overlay_trigger" rel="#new_task">Create a new list</div>
 <div class="overlay" id="new_task">
 	Create a new task here.
 	<%= render :partial => "lists/form", :locals => {:@list => List.new, :params=> {:owner_id => @owner.id}}  %>

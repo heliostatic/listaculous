@@ -13,16 +13,24 @@
 
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :size => "25x10" %>
   </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.text_area :status %>
+    <%= f.text_area :status, :size => "25x1" %>
   </div>
-  <div class="field">
-    <%= f.label :list_id %><br />
-    <%= f.text_field :list_id %>
-  </div>
+
+<% if not params[:list_id] %>
+	<div class="field">
+	  <%= f.label :list_id %><br />
+	  <%= f.text_field :list_id %>
+	</div>
+<% else %>
+	<div class="field">
+    	<%= f.hidden_field :list_id, {:value => params[:list_id]} %>
+	</div>
+<% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
