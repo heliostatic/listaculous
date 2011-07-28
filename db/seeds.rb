@@ -8,7 +8,7 @@
 
 owners = Owner.create([{ :name => 'Ben'}, {:name => "Ian"}])
 lists = List.create([{ :name => "Hello", :owner_id => 1 }, { :name => "Goodbye", :owner_id => 2 }])
-tasks = Task.create([{:description => "Task 1", :status => "finished", :list_id => 1}, 
-                      {:description => "Task 2", :status => "unfinished", :list_id => 1}, 
-                      {:description => "Task 3", :status => "finished", :list_id => 2}, 
-                      {:description => "Task 4", :status => "unfinished", :list_id => 2}])
+tasks = Task.create([{:description => "Task 1", :status => "1", :list_id => 1}, 
+                      {:description => "Task 2", :status => "0", :list_id => 1}, 
+                      {:description => "Task 3", :status => "1", :list_id => 2}, 
+                      {:description => "Task 4", :status => "0", :list_id => 2}])
