@@ -20,7 +20,7 @@
 	<ul>
 	<% @list.tasks.each do |t|%>
 		<li>
-			<% if t.status == "unfinished" %>
+			<% if t.status == 0 %>
 			    <%= check_box_tag t.id, true, checked = false, {:class => 'task'} %>
 			<% else %>
 				<%= check_box_tag t.id, true, checked = true, {:class => 'task'} %>
