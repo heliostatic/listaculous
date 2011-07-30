@@ -1,8 +1,10 @@
 $(".task").live("click", function() {
     var data = [$(this)[0].checked, $(this)[0].id]; // the value of input that need to send to server
-    alert(data);
-    $.get(url, data, // make ajax request
-     function(html) { // function to handle the response
-      $("#worked").html("html"); // change the inner html of update div
-     });
+    $.ajax({
+     url:'/tasks/' + $(this)[0].id,
+     success: function() {
+         alert('success!')
+     },
+     type: 'PUT', //This won't work in IE6. Sorry IE6, this is the right REST verb.   
+    });
 });
