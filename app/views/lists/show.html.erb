@@ -36,7 +36,7 @@
 <div class="overlay_trigger" rel="#new_task">Create a new task</div>
 <div class="overlay" id="new_task">
 	Create a new task here.
-	<%= render 'tasks/form', :@task => Task.new, :params => {:list_id => @list.id}  %>
+	<%= render 'tasks/form', :@task => List.new, :params => {:list_id => @list.id}  %>
 </div>
 <script>
 $("div[rel]").overlay();
