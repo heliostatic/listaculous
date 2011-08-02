@@ -1,6 +1,11 @@
+<script>
+  owner_id = <%= @list.owner_id %>;
+  parentlist_id = <%= @list.id %>;
+</script>
+  <%= javascript_include_tag "inline_effects.js" %>
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "finish.js" %>
-  <%= javascript_include_tag "inline_effects.js" %>
+
 <% end %>
 <p id="notice"><%= notice %></p>
 

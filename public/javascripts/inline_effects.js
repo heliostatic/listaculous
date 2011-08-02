@@ -1,3 +1,15 @@
+function CreateTask(ref,  name, parentlist_id, owner_id) {
+	var ldata = { 'name':name, 'parentlist_id':parentlist_id, 'owner_id':owner_id, 'status':0}
+  $.ajax({
+   url:'/lists',
+   data:{'list':ldata},
+   success: function() {
+		ref.removeClass('unconfirmed');	
+   },
+   type: 'POST', //This won't work in IE6. Sorry IE6, this is the right REST verb.   
+  });
+}
+
 $("body").live('keypress', function(e){
 	if (e.keyCode == 13) {
 		if ($("#newTask").length ==0) {
@@ -7,7 +19,9 @@ $("body").live('keypress', function(e){
 		}
 		else {
 			var task_name = $('#newTask').val();
-			$('#createPrompt').after('<div class="unconfirmed">'+task_name+'</div>');
+			var ref = $('<div class="unconfirmed">'+task_name+'</div>');
+			$('#createPrompt').after(ref);
+			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
 			$('#newTask').remove();
 			$('#createPrompt').css('display', 'block');
 		}
