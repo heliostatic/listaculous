@@ -59,7 +59,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
 
     respond_to do |format|
-      if @list.update_attributes(params[:list])
+      if @list.update_attributes({:status => params[:status]})
         format.html { redirect_to(@list, :notice => 'List was successfully updated.') }
         format.xml  { head :ok }
       else
