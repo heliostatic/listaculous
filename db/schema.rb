@@ -10,25 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728021033) do
+ActiveRecord::Schema.define(:version => 20110802020842) do
 
   create_table "lists", :force => true do |t|
     t.string   "name"
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parentlist_id"
+    t.integer  "status"
+    t.text     "description"
   end
 
   create_table "owners", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tasks", :force => true do |t|
-    t.text     "description"
-    t.integer  "status"
-    t.integer  "list_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
