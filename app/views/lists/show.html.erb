@@ -1,5 +1,6 @@
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "finish.js" %>
+  <%= javascript_include_tag "inline_effects.js" %>
 <% end %>
 <p id="notice"><%= notice %></p>
 
@@ -18,6 +19,7 @@
 <p>
 	<b>Tasks</b>
 	<ul>
+	<li id="createPrompt" class="ghost">Create new task</li>
 	<% @list.tasks.each do |t|%>
 		<li>
 			<% if t.status == 0 %>
