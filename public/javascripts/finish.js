@@ -2,7 +2,7 @@ $(".task").live("click", function() {
     var status = ($(this)[0].checked)?1:0;
     var tdata = { 'id':$(this)[0].id , 'status':status }
     $.ajax({
-     url:'/tasks/' + $(this)[0].id,
+     url:'/lists/' + $(this)[0].id,
      data:tdata,
      success: function() {
 				
