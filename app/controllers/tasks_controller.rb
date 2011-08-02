@@ -58,7 +58,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     respond_to do |format|
-      if @task.update_attributes({:status,params[:status]})
+      if @task.update_attributes({:status => params[:status]})
         format.html { redirect_to(@task, :notice => 'Task was successfully updated.') }
         format.xml  { head :ok }
       else
