@@ -6,8 +6,9 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
    beforeSend: function(req) {
            req.setRequestHeader("Accept", "text/xml");
    },
-   success: function() {
-		ref.removeClass('unconfirmed');	
+   success: function(data) {
+		ref.removeClass('unconfirmed');
+		var newid = $(data).find('id').text();	
    },
    type: 'POST', //This won't work in IE6. Sorry IE6, this is the right REST verb.   
   });
