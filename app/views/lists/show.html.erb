@@ -29,10 +29,10 @@
 	<% @list.tasks.each do |t|%>
 			<% if t.status == 0 %>
 			<li class="task">
-			    <%= check_box_tag t.id, true, checked = false, {:class => 'task'} %>			
+			    <%= check_box_tag t.id, true, checked = false, {:class => ''} %>			
 			<% else %>
 			<li class="task finished">
-				<%= check_box_tag t.id, true, checked = true, {:class => 'task'} %>
+				<%= check_box_tag t.id, true, checked = true, {:class => ''} %>
 			<% end %>
 			<%= link_to t.name , t %>
 		</li>

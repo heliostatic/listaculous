@@ -17,11 +17,13 @@ $("body").live('keypress', function(e){
 			$('#createPrompt').after('<input type="text" id="newTask"/>');
 			$("#newTask")[0].focus();			
 		}
-		else {
-			var task_name = $('#newTask').val();
-			var ref = $('<div class="unconfirmed">'+task_name+'</div>');
-			$('#createPrompt').after(ref);
-			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
+		else  {
+		    if ($('#newTask').val().length > 1) {
+    			var task_name = $('#newTask').val();
+    			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
+    			$('#createPrompt').after(ref);
+    			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
+		    }
 			$('#newTask').remove();
 			$('#createPrompt').css('display', 'block');
 		}
