@@ -2,6 +2,10 @@ li {
 	list-style:none;
 }
 
+#lists .numbers {
+    display:inline;
+}
+
 .overlay {
     padding:5px;
 	display:none;

@@ -32,7 +32,7 @@
 			<% else %>
 				<%= check_box_tag t.id, true, checked = true, {:class => 'task'} %>
 			<% end %>
-			<%= link_to t.description , t %>
+			<%= link_to t.name , t %>
 		</li>
 	<% end %>
 	</ul>

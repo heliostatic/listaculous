@@ -4,10 +4,11 @@
 	<h2>Lists:</h2>
 	<div id="new_list"><%= link_to "New List", :controller => "lists", :action => "new", :owner_id => @owner.id %></div>
   <% @owner.lists.each do |l| %>
-	<div class="name">
+	<div class="task">
 	<%= link_to l.name, l %>
-	</div>
+
 	<div class="numbers"><span class="unfinished">(<%= l.tasks.length - l.tasks.where(:status => "Finished").length %>)</span> <span class="finished"><%= l.tasks.length%></span></div>
+		</div>
   <% end %>
 </div>
 
