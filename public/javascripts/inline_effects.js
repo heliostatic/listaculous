@@ -3,6 +3,9 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
   $.ajax({
    url:'/lists',
    data:{'list':ldata},
+   beforeSend: function(req) {
+           req.setRequestHeader("Accept", "text/xml");
+   },
    success: function() {
 		ref.removeClass('unconfirmed');	
    },
