@@ -25,6 +25,7 @@
 	<b>Tasks</b>
 	<ul>
 	<li id="createPrompt" class="ghost">Create new task</li>
+	<% @list.tasks.reverse! %>
 	<% @list.tasks.each do |t|%>
 			<% if t.status == 0 %>
 			<li class="task">
