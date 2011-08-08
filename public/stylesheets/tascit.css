@@ -6,6 +6,10 @@ li {
     display:inline;
 }
 
+.task.finished {
+    text-decoration:line-through;
+}
+
 .overlay {
     padding:5px;
 	display:none;
