@@ -8,7 +8,8 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
    },
    success: function(data) {
 		ref.removeClass('unconfirmed');
-		var newid = $(data).find('id').text();	
+		var newid = $(data).find('id').text();
+		ref.prepend('<input class="checker" id="'+newid+'" name="58" type="checkbox">');	
    },
    type: 'POST', //This won't work in IE6. Sorry IE6, this is the right REST verb.   
   });
