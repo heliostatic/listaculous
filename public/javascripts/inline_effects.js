@@ -24,8 +24,8 @@ $("body").live('keypress', function(e){
 			$("#taskName")[0].focus();			
 		}
 		else  {
-		    if ($('#newTask').val().length) {
-    			var task_name = $('#newTask').val();
+		    if ($('#taskName').val().length) {
+    			var task_name = $('#taskName').val();
     			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
     			$('#createPrompt').after(ref);
     			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
