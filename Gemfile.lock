@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/swanandp/acts_as_list.git
+  revision: 75e9bba5185d02747853ab7455955509d245da66
+  specs:
+    acts_as_list (0.1.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -71,5 +77,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list!
   rails (= 3.0.9)
   sqlite3
