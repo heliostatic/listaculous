@@ -17,13 +17,14 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
 
 $("body").live('keypress', function(e){
 	if (e.keyCode == 13) {
+	    e.preventDefault(); //prevents sending the carriage return to the text field.
 		if ($("#newTask").length ==0) {
 			$('#createPrompt').css('display', 'none');
-			$('#createPrompt').after('<input type="text" id="newTask"/>');
-			$("#newTask")[0].focus();			
+			$('#createPrompt').after('<li id="newTask"><input type="text" id="taskName"/></li>');
+			$("#taskName")[0].focus();			
 		}
 		else  {
-		    if ($('#newTask').val().length > 1) {
+		    if ($('#newTask').val().length) {
     			var task_name = $('#newTask').val();
     			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
     			$('#createPrompt').after(ref);
