@@ -2,7 +2,6 @@
 <p id="notice"><%= notice %></p>
 <div id="lists">
 	<h2>Lists:</h2>
-	<div id="new_list"><%= link_to "New List", :controller => "lists", :action => "new", :owner_id => @owner.id %></div>
   <% @lists_with_no_parents.each do |l| %>
 	<div class="task">
 	<%= link_to l.name, l %>
@@ -13,8 +12,6 @@
 </div>
 
 <p>
-<%= link_to 'Edit', edit_owner_path(@owner) %> |
-<%= link_to 'Back', owners_path %>
 </p>
 <div class="overlay_trigger" rel="#new_task">Create a new list</div>
 <div class="overlay" id="new_task">
