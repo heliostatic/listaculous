@@ -10,23 +10,17 @@
 
 <div id="worked"></div>
 
-<p>
-  <b>Name:</b>
-  <%= @list.name %>
-</p>
+
+<h1><%= @list.name %></h1>
+by <%= @list.owner.name %>
+<%= @list.description %>
 
 <p>
-  <b>Owner:</b>
-  <%= @list.owner_id %>
-</p>
-
-<p>
-	<b>Tasks</b>
 	<ul>
 	<li id="createPrompt" class="ghost">Create new task</li>
 	<% @list.tasks.reverse! %>
 	<% @list.tasks.each do |t|%>
-			<% if t.status == 0 %>
+			<% if t.completed? %>
 			<li class="task">
 			    <%= check_box_tag t.id, true, checked = false, {:class => 'checker'} %>			
 			<% else %>
@@ -39,8 +33,6 @@
 	</ul>
 </p>
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
 <div class="overlay_trigger" rel="#new_task">Create a new task</div>
 <div class="overlay" id="new_task">
 	Create a new task here.
