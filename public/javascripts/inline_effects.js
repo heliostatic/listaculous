@@ -10,7 +10,7 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
 		ref.removeClass('unconfirmed');
 		var newid = $(data).find('id').text();
 		ref.wrapInner(function() {
-		  return '<a href="' + $(data).find('id').text() + '" / >';
+		  return '<a href="' + newid + '" / >';
 		});	
 		ref.prepend('<input class="checker" id="'+newid+'" name="58" type="checkbox">');
    },
