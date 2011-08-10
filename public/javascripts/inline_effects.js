@@ -44,4 +44,7 @@ $("body").live('keypress', function(e){
 	}
 	
 });
+$("#createPrompt").live('click', function(){
+        MakeOrSubmitTaskForm();
+});
 //13
