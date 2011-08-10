@@ -1,5 +1,4 @@
 class List < ActiveRecord::Base
-	include ListsHelper
   belongs_to :owner
   acts_as_list :scope => :parentlist
   has_many :tasks, :class_name => 'List', :foreign_key => "parentlist_id", :order => "position"
@@ -14,7 +13,7 @@ class List < ActiveRecord::Base
 		parents = []
 		list = self
 		while list.parentlist_id
-			list = get_list_by_id(list.parentlist_id)
+			list = List.find(list.parentlist_id)
 			parents << list
 		end
 		parents.reverse!
