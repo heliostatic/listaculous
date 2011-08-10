@@ -12,9 +12,14 @@
 
 
 <h1><%= @list.name %></h1>
-by <%= @list.owner.name %>
 <%= @list.description %>
-
+<br />
+<ul>
+<li><%= link_to @list.owner.name, @list.owner %></li>
+<% @list.lineage.each do |p| %>
+	<li><%= link_to p.name, p %></li>
+<% end %>
+</ul>
 <p>
 	<ul>
 	<li id="createPrompt" class="ghost">Create new task</li>
