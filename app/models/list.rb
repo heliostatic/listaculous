@@ -18,4 +18,12 @@ class List < ActiveRecord::Base
 		end
 		parents.reverse!
   end
+  
+	def children
+		children = List.where(:parentlist_id => self.id)
+	end
+
+	def has_children?
+	  self.children.length > 0
+  end
 end

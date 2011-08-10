@@ -10,16 +10,15 @@
 
 <div id="worked"></div>
 
-
-<h1><%= @list.name %></h1>
-<%= @list.description %>
-<br />
 <ul id="breadcrumbs">
 <li><%= link_to @list.owner.name, @list.owner %></li>
 <% @list.lineage.each do |p| %>
 	<li><%= link_to p.name, p %></li>
 <% end %>
 </ul>
+<h1><%= @list.name %></h1>
+<%= @list.description %>
+
 <p>
 	<ul>
 	<li id="createPrompt" class="ghost">Create new task</li>
@@ -32,17 +31,11 @@
 			<li class="task finished">
 				<%= check_box_tag t.id, true, checked = true, {:class => 'checker'} %>
 			<% end %>
+			<% if t.has_children? %>
+				§
+			<% end %>
 			<%= link_to t.name , t %>
 		</li>
 	<% end %>
 	</ul>
 </p>
-
-<div class="overlay_trigger" rel="#new_task">Create a new task</div>
-<div class="overlay" id="new_task">
-	Create a new task here.
-	<%= render 'lists/form', :@task => List.new, :params => {:list_id => @list.id}  %>
-</div>
-<script>
-$("div[rel]").overlay();
-</script>
