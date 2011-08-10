@@ -14,6 +14,7 @@ class OwnersController < ApplicationController
   # GET /owners/1.xml
   def show
     @owner = Owner.find(params[:id])
+    @lists_with_no_parents = @owner.lists.where(:parentlist_id => nil)
 
     respond_to do |format|
       format.html # show.html.erb

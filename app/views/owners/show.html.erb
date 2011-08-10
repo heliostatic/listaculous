@@ -3,7 +3,7 @@
 <div id="lists">
 	<h2>Lists:</h2>
 	<div id="new_list"><%= link_to "New List", :controller => "lists", :action => "new", :owner_id => @owner.id %></div>
-  <% @owner.lists.each do |l| %>
+  <% @lists_with_no_parents.each do |l| %>
 	<div class="task">
 	<%= link_to l.name, l %>
 
