@@ -21,7 +21,7 @@
 
 <p>
 	<ul>
-	<li id="createPrompt" class="ghost"><input placeholder="Create new task"></input></li>
+	<li id="createPrompt" class="ghost"><input type="text" placeholder="Create new task"></input></li>
 	<% @list.tasks.reverse! %>
 	<% @list.tasks.each do |t|%>
 			<% if t.completed? %>
