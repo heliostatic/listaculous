@@ -14,7 +14,7 @@
 <h1><%= @list.name %></h1>
 <%= @list.description %>
 <br />
-<ul>
+<ul id="breadcrumbs">
 <li><%= link_to @list.owner.name, @list.owner %></li>
 <% @list.lineage.each do |p| %>
 	<li><%= link_to p.name, p %></li>
