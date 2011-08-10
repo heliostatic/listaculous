@@ -18,24 +18,29 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
   });
 }
 
+function MakeOrSubmitTaskForm() {
+    if ($("#newTask").length ==0) {
+		$('#createPrompt').css('display', 'none');
+		$('#createPrompt').after('<li id="newTask"><input type="text" id="taskName"/></li>');
+		$("#taskName")[0].focus();			
+	}
+	else  {
+	    if ($('#taskName').val().length) {
+			var task_name = $('#taskName').val();
+			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
+			$('#createPrompt').after(ref);
+			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
+	    }
+		$('#newTask').remove();
+		$('#createPrompt').css('display', 'block');
+	}
+}
+
+
 $("body").live('keypress', function(e){
 	if (e.keyCode == 13) {
 	    e.preventDefault(); //prevents sending the carriage return to the text field.
-		if ($("#newTask").length ==0) {
-			$('#createPrompt').css('display', 'none');
-			$('#createPrompt').after('<li id="newTask"><input type="text" id="taskName"/></li>');
-			$("#taskName")[0].focus();			
-		}
-		else  {
-		    if ($('#taskName').val().length) {
-    			var task_name = $('#taskName').val();
-    			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
-    			$('#createPrompt').after(ref);
-    			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
-		    }
-			$('#newTask').remove();
-			$('#createPrompt').css('display', 'block');
-		}
+        MakeOrSubmitTaskForm();
 	}
 	
 });
