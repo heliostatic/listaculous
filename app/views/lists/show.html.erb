@@ -20,9 +20,8 @@
 <%= @list.description %>
 
 <p>
-	<ul>
+	<ul id="tasklist">
 	<li id="createPrompt" class="ghost"><input type="text" placeholder="Create new task"></input></li>
-	<% @list.tasks.reverse! %>
 	<% @list.tasks.each do |t|%>
 			<% if t.completed? %>
 			<li class="task">
