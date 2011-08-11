@@ -30,18 +30,19 @@ function MakeOrSubmitTaskForm() {
 			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
 			$('#createPrompt').after(ref);
 			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
-			var curx = ref.offset().left;
-			var cury = ref.offset().top;
-			var newx=$('#tasklist li:last').offset().left;
-            var newy=$('#tasklist li:last').offset().top;
-            ref.css({"position": "absolute","left":curx+"px", "top":cury+"px"})
-            .animate({"top":newy+"px","left":newx+"px"}, 500, function() { 
-                ref.remove();
-                $("#tasklist").append(ref);
-                ref.removeAttr('style');
-            });
-            
-            
+			if($('#tasklist li.task').length !=1) {
+	            var curx = ref.offset().left;
+    			var cury = ref.offset().top;
+    			var newx=$('#tasklist li:last').offset().left;
+                var newy=$('#tasklist li:last').offset().top;
+                ref.css({"position": "absolute","left":curx+"px", "top":cury+"px"})
+                .animate({"top":newy+"px","left":newx+"px"}, 500, function() { 
+                    ref.remove();
+                    $("#tasklist").append(ref);
+                    ref.removeAttr('style');
+                });
+	        }
+
 	    }
 		$('#newTask').remove();
 		$('#createPrompt').css('display', 'block');
