@@ -6,11 +6,11 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
    beforeSend: function(req) {
            req.setRequestHeader("Accept", "text/xml");
    },
-   success: function(data) {
+   success: function(data, status, responseObject) {
 		ref.removeClass('unconfirmed');
 		var newid = $(data).find('id').text();
 		ref.wrapInner(function() {
-		  return '<a href="' + newid + '" / >';
+		  return '<a href="' + responseObject.getResponseHeader('Location') + '" / >';
 		});	
 		ref.prepend('<input class="checker" id="'+newid+'" name="58" type="checkbox">');
    },
