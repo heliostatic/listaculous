@@ -44,7 +44,7 @@ function MakeOrSubmitTaskForm() {
                 $("#tasklist").append(ref);
                 ref.removeAttr('style');
             });
-					MakeSortable();
+					MakeSortable(); //may not be necessary
 	    }
 		$('#newTask').remove();
 		$('#createPrompt').css('display', 'block');
