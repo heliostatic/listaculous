@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
 gem 'acts_as_list', :git => 'https://github.com/swanandp/acts_as_list.git'
+gem 'omniauth'
 # gem 'jquery-rails', '>= 1.0.12'
 
 # Bundle edge Rails instead:
