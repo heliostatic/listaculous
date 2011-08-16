@@ -43,6 +43,7 @@ function MakeOrSubmitTaskForm() {
                 $("#tasklist").append(ref);
                 ref.removeAttr('style');
             });
+					MakeSortable();
 	    }
 		$('#newTask').remove();
 		$('#createPrompt').css('display', 'block');
@@ -60,4 +61,31 @@ $("body").live('keypress', function(e){
 $("#createPrompt").live('click', function(){
         MakeOrSubmitTaskForm();
 });
+
+$(document).ready(function(){
+	MakeSortable();
+})
+
+function MakeSortable(){
+	$('#tasklist').sortable({
+		axis: 'y',
+		dropOnEmpty: false,
+		cursor: 'crosshair',
+		items: 'li',
+		opacity: 0.4,
+		scroll: true,
+		update: function(e, ui){
+			item = this;
+			$.ajax({
+				type: 'post',
+				data: $('#tasklist').sortable('serialize'),
+				dataType: 'script',
+				complete: function(request){
+					
+				$(ui.item).effect('highlight');
+			},
+			url: '/tasks/sort'})
+		}
+	});
+}
 //13
