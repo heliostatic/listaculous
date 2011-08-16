@@ -6,9 +6,9 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-owners = Owner.create([{ :name => 'Ben'}, {:name => "Ian"}])
-lists = List.create([{ :name => "Hello", :owner_id => 1 }, { :name => "Goodbye", :owner_id => 2 }])
-tasks = Task.create([{:description => "Task 1", :status => "1", :list_id => 1}, 
-                      {:description => "Task 2", :status => "0", :list_id => 1}, 
-                      {:description => "Task 3", :status => "1", :list_id => 2}, 
-                      {:description => "Task 4", :status => "0", :list_id => 2}])
+owners = Owner.create([{ :name => 'Ben', :id => 1, :uid => 4656441, :provider => "twitter"}])
+lists = List.create([{ :name => "First", :id => 1, :owner_id => 1, :parentlist_id => nil}, { :name => "Goodbye", :owner_id => 1, :parentlist_id => nil }])
+tasks = List.create([{:name => "One", :status => "1", :parentlist_id => 1, :position => 1}, 
+                      {:name => "Two", :status => "0", :parentlist_id => 1, :position => 2}, 
+                      {:name => "Three", :status => "1", :parentlist_id => 1, :position => 3}, 
+                      {:name => "Four", :status => "0", :parentlist_id => 1, :position => 4}])
