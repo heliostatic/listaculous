@@ -83,7 +83,7 @@ function MakeSortable(){
 			var oldposition = ui.item.attr('oldposition');
 			ui.item.removeAttr('oldposition');
 			var poschange = ui.item.index()-oldposition;
-			var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange;
+			var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange + '&parent_id='+parentlist_id;//parentlist_id automagic from show.html
 			$.ajax({
 				type: 'post',
 				data: thedata,

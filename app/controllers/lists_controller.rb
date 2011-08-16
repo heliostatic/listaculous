@@ -92,11 +92,29 @@ class ListsController < ApplicationController
    end
    
    def sort
+     @list = List.find(params[:id])
      @lists = List.where(:parentlist_id => params[:parent_id])
-     @lists.each do |list|
-       
-       #list.position = params['list'].index(list.id.to_s) + 1
-     list.save
+     poschange = params[:poschange].to_i
+     if poschange > 0 then
+       higherlists = @lists.where(:position => @list.position+1..(@list.position+poschange))
+       higherlists.each do |l|
+         l.position -=1
+         l.save
+       end
+       @list.position = @list.position + poschange
+       @list.save
+     elsif poschange < 0 then
+       lowerlists = @lists.where(:position => (@list.position - poschange)..@list.position-1)
+       lowerlists.each do |l|
+         l.position += 1
+         l.save
+       end
+       @list.position = @list.position + poschange
+       @list.save
      end
+     
+     
+     
+     render :nothing => true
    end
 end
