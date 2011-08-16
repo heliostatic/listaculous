@@ -90,4 +90,13 @@ class ListsController < ApplicationController
       format.js
     end
    end
+   
+   def sort
+     @lists = List.where(:parentlist_id => params[:parent_id])
+     @lists.each do |list|
+       
+       #list.position = params['list'].index(list.id.to_s) + 1
+     list.save
+     end
+   end
 end

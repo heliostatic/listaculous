@@ -12,7 +12,8 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
 		ref.wrapInner(function() {
 		  return '<a href="' + responseObject.getResponseHeader('Location') + '" / >';
 		});	
-		ref.prepend('<input class="checker" id="'+newid+'" name="58" type="checkbox">');
+		ref.prepend('<input class="checker" id="checkbox_'+newid+'" type="checkbox">');
+		ref.attr('id', newid)
    },
    type: 'POST', //This won't work in IE6. Sorry IE6, this is the right REST verb.   
   });
@@ -74,17 +75,24 @@ function MakeSortable(){
 		items: 'li',
 		opacity: 0.4,
 		scroll: true,
+		start: function(e, ui){
+			var pos = ui.item.index();
+			ui.item.attr('oldposition', pos);
+		},
 		update: function(e, ui){
-			item = this;
+			var oldposition = ui.item.attr('oldposition');
+			ui.item.removeAttr('oldposition');
+			var poschange = ui.item.index()-oldposition;
+			var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange;
 			$.ajax({
 				type: 'post',
-				data: $('#tasklist').sortable('serialize'),
+				data: thedata,
 				dataType: 'script',
 				complete: function(request){
 					
 				$(ui.item).effect('highlight');
 			},
-			url: '/tasks/sort'})
+			url: '/lists/sort'})
 		}
 	});
 }

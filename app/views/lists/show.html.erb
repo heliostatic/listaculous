@@ -25,11 +25,11 @@
 	<li id="createPrompt" class="ghost"><input type="text" placeholder="Create new task"></input></li>
 	<% @list.tasks.each do |t|%>
 			<% if t.completed? %>
-			<li class="task">
-			    <%= check_box_tag t.id, true, checked = false, {:class => 'checker'} %>			
+			<li class="task" id="<%= t.id %>">
+			    <%= check_box_tag "checkbox_#{t.id}", true, checked = false, {:class => 'checker'} %>			
 			<% else %>
-			<li class="task finished">
-				<%= check_box_tag t.id, true, checked = true, {:class => 'checker'} %>
+			<li class="task finished" id="<%= t.id %>">
+				<%= check_box_tag "checkbox_#{t.id}", true, checked = true, {:class => 'checker'} %>
 			<% end %>
 			<% if t.has_children? %>
 				§

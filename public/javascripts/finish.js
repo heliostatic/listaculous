@@ -1,9 +1,9 @@
 $(".task .checker").live("click", function() {
     var status = ($(this)[0].checked)?1:0;
-    var tdata = { 'id':$(this)[0].id , 'status':status }
+    var tdata = { 'id':$(this).parent()[0].id , 'status':status }
     var el = this;
     $.ajax({
-     url:'/lists/' + $(this)[0].id,
+     url:'/lists/' + $(this).parent()[0].id,
      data:tdata,
      success: function() {
 		$(el).parent().toggleClass('finished');	
