@@ -6,7 +6,9 @@ Tascit::Application.routes.draw do
 	
 	resources :tasks
   resources :lists do
-      post :sort, on: :collection
+      collection do
+        post 'sort'
+      end
   end
   resources :owners
   # The priority is based upon order of creation:

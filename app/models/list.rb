@@ -26,4 +26,36 @@ class List < ActiveRecord::Base
 	def has_children?
 	  self.children.length > 0
   end
+  
+  def swap_position(target)
+    oldpos = self.position
+    self.position = target.position
+    target.position = oldpos
+  end
+  
+  def movedown (n)
+    n.times do
+      nextlist = self.higher_item or self
+      self.swap_position(nextlist)
+      nextlist.save
+    end
+    self.save
+  end
+  
+  def moveup (n)
+    n.times do
+      prevlist = self.lower_item or self
+      self.swap_position(prevlist)
+      prevlist.save
+    end
+    self.save
+  end
+  
+  def move (delta)
+    if delta > 0 then
+      self.moveup delta
+    else
+      self.movedown delta*-1
+    end
+  end
 end
