@@ -5,7 +5,7 @@ class List < ActiveRecord::Base
   belongs_to :parentlist, :class_name => 'List'
   
   def completed?
-		self.status == 0
+    self.status == 0
   end
 	
   # return an array of parent ids from the first list with parent nil
