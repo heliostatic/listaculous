@@ -55,7 +55,7 @@ class List < ActiveRecord::Base
     if delta > 0 then
       self.moveup delta
     else
-      self.movedown delta*-1
+      self.movedown delta.abs
     end
   end
 end
