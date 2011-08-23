@@ -1,5 +1,5 @@
 Tascit::Application.routes.draw do
-	root :to => "owners#index"
+	root :to => "sessions#new"
 	
 	match "/auth/:provider/callback" => "sessions#create"
 	match "/signout" => "sessions#destroy", :as => :signout

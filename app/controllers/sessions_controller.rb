@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
   skip_before_filter :require_login, :only => [:create, :new]
   
   def new
+    if current_user then
+      redirect_to current_user
+    end
   end
   
 	def create
