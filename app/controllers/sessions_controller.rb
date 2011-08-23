@@ -1,4 +1,9 @@
 class SessionsController < ApplicationController
+  skip_before_filter :require_login, :only => [:create, :new]
+  
+  def new
+  end
+  
 	def create
    	#raise request.env["omniauth.auth"].to_yaml
 		auth = request.env["omniauth.auth"] 

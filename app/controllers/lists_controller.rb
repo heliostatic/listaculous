@@ -1,4 +1,6 @@
 class ListsController < ApplicationController
+  before_filter :signed_in?
+  
   # GET /lists
   # GET /lists.xml
   def index

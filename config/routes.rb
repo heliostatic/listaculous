@@ -3,6 +3,7 @@ Tascit::Application.routes.draw do
 	
 	match "/auth/:provider/callback" => "sessions#create"
 	match "/signout" => "sessions#destroy", :as => :signout
+	match "/signin" => "sessions#new", :as => :signin
 	
 	resources :tasks
   resources :lists do
