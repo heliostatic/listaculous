@@ -1,4 +1,5 @@
 class OwnersController < ApplicationController
+  before_filter :authorized_user
   # GET /owners
   # GET /owners.xml
   def index
@@ -81,4 +82,14 @@ class OwnersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+   
+   def authorized_user
+     unless current_user.id == Owner.find(params[:id]).id 
+       flash[:error] = "Fuck off"
+       redirect_to signin_path
+     end
+   end
+   
 end

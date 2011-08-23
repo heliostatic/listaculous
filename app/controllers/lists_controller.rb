@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
-  before_filter :signed_in?
-  
+  before_filter :authorized_user, :except => [:create]
+  before_filter :authorized_creator, :only => [:create]
   # GET /lists
   # GET /lists.xml
   def index
@@ -98,5 +98,19 @@ class ListsController < ApplicationController
      delta = params[:poschange].to_i
      @list.move(delta)
      render :nothing => true
+   end
+   
+   private
+   
+   def authorized_user
+     unless current_user.id == List.find(params[:id]).owner_id 
+       flash[:error] = "Fuck off"
+     end
+   end
+   
+   def authorized_creator
+     unless current_user.id == params[:list][:owner_id].to_i
+       flash[:notice] = "Fuck off"
+     end 
    end
 end
