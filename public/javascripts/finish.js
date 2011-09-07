@@ -1,3 +1,19 @@
+function makeListFromJSON(json) {
+	var thelist = $('<ul></ul>');
+}
+
+function fetchChildren(list_id) {
+	var uri = '/lists/' + list_id;
+	$.ajax({
+		type:'GET',
+		url: uri,
+		dataType: 'json',
+		success: function(data, textStatus, jqXHR) {
+			
+		}
+	});
+}
+
 $(".task .checker").live("click", function() {
     var status = ($(this)[0].checked)?1:0;
     var tdata = { 'id':$(this).parent()[0].id , 'status':status }

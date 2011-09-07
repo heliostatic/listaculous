@@ -1,0 +1,16 @@
+<ul id="list_<%= params[:cssid] %>">
+<% @list.tasks.each do |t|%>
+		<% if t.completed? %>
+		<li class="task" id="<%= t.id %>">
+		    <%= check_box_tag "checkbox_#{t.id}", true, checked = false, {:class => 'checker'} %>			
+		<% else %>
+		<li class="task finished" id="<%= t.id %>">
+			<%= check_box_tag "checkbox_#{t.id}", true, checked = true, {:class => 'checker'} %>
+		<% end %>
+		<% if t.has_children? %>
+			§
+		<% end %>
+		<%= link_to t.name , t %>
+	</li>
+<% end %>
+</ul>

@@ -20,6 +20,7 @@ class ListsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @list }
+      format.json { render :json => @list, :methods => :children}
     end
   end
 
@@ -98,6 +99,13 @@ class ListsController < ApplicationController
      delta = params[:poschange].to_i
      @list.move(delta)
      render :nothing => true
+   end
+   
+   # this method needs to be actually written, but not right now.
+   # either it should return a partial, nothing, or always return something
+   def child_list
+    @list = List.find(params[:id])
+    render :partial => 'lists/list', @list, :params[:cssid => @list.id]
    end
    
    private
