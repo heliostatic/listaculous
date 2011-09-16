@@ -1,14 +1,12 @@
-<script>
+<% content_for :javascript_on_page do %>
   owner_id = <%= @list.owner_id %>;
-</script>
+<% end %>
+<% content_for :javascript_includes do %>
   <%= javascript_include_tag "inline_effects.js" %>
   <%= javascript_include_tag "jquery-ui-1.8.15.min.js" %>
-<% content_for :javascript_includes do %>
   <%= javascript_include_tag "finish.js" %>
 <% end %>
 <p id="notice"><%= notice %></p>
-
-<div id="worked"></div>
 
 <ul id="breadcrumbs">
 <li><%= link_to @list.owner.name, @list.owner %></li>
@@ -19,8 +17,8 @@
 <h1><%= @list.name %></h1>
 <%= @list.description %>
 
-<p>
+<div id=<%= @list.id %>>
   	<div id="createPrompt" class="ghost"><input type="text" placeholder="Create new task"></input></div>
 
 		<%= render 'lists/list', :@list => @list, :params => {:cssid => @list.id} %>
-</p>
+</div>

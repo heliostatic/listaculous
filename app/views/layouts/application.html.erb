@@ -9,6 +9,9 @@
 	<%= javascript_include_tag "application" %>
 	<%= yield :javascript_includes %>
   <%= csrf_meta_tag %>
+  <script>
+    <%= yield :javascript_on_page %>
+  </script>
 </head>
 <body>
 <div id="user_nav">
@@ -18,6 +21,7 @@
 <% else  %>
 	<%= link_to "Sign in with Twitter", "/auth/twitter" %>
 <% end %>
+</div>
 <%= yield %>
 
 </body>
