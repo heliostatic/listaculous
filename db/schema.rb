@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816031057) do
+ActiveRecord::Schema.define(:version => 20110916022453) do
 
   create_table "lists", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20110816031057) do
     t.integer  "status"
     t.text     "description"
     t.integer  "position"
+    t.integer  "priority"
+    t.integer  "duration"
   end
 
   create_table "owners", :force => true do |t|
