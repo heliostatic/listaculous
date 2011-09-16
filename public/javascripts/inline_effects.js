@@ -67,6 +67,33 @@ $("body").live('keypress', function(e){
 	}
 	
 });
+
+$('li.task').live({mouseenter: function(e)
+    {
+        var addel = '<span id="adder">+</span>';
+        if( $(this).children('#createPrompt').length ==0  ) {
+            $(this).append(addel);
+        }
+        
+        e.stopPropagation();
+    },
+    mouseleave: function(e)
+    {
+        $('#adder').remove();
+        e.stopPropagation();
+    }
+});
+
+$('#adder').live('click', function(e){
+    var parent = $(e.target).parent()
+    var parentid = parent.attr('id');
+    var prompt = $('#createPrompt').detach();
+    var targ = parent.children('a');
+    targ.after(prompt);
+    prompt.children('input').focus();
+    $('#adder').remove();
+});
+
 $("#createPrompt").live('click', function(){
         MakeOrSubmitTaskForm();
 });
