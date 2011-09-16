@@ -24,7 +24,7 @@ class List < ActiveRecord::Base
 	end
 
 	def has_children?
-	  self.children.length > 0
+	  self.children.size > 0
   end
   
   def swap_position(target)
