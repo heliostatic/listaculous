@@ -60,14 +60,6 @@ function MakeOrSubmitTaskForm(parentlist_id) {
 }
 
 
-$("body").live('keypress', function(e){
-	if (e.keyCode == 13) {
-	    e.preventDefault(); //prevents sending the carriage return to the text field.
-        MakeOrSubmitTaskForm($('ul.tasklist').attr('data-listid'));
-	}
-	
-});
-
 $('li.task').live({mouseenter: function(e)
     {
         var addel = '<span id="adder">+</span>';
@@ -95,7 +87,17 @@ $('#adder').live('click', function(e){
 });
 
 $("#createPrompt").live('focus', function(){
-        MakeOrSubmitTaskForm();
+    var parentid = $(this).parent().attr('id');
+    MakeOrSubmitTaskForm(parentid);
+});
+
+$("body").live('keypress', function(e){
+	if (e.keyCode == 13) {
+	    var parentid = $("#createPrompt").parent().attr('id');
+        MakeOrSubmitTaskForm(parentid);
+	    e.preventDefault(); //prevents sending the carriage return to the text field.
+	}
+	
 });
 
 $(document).ready(function(){
