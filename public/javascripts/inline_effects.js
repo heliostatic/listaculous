@@ -94,7 +94,7 @@ $('#adder').live('click', function(e){
     $('#adder').remove();
 });
 
-$("#createPrompt").live('click', function(){
+$("#createPrompt").live('focus', function(){
         MakeOrSubmitTaskForm();
 });
 
