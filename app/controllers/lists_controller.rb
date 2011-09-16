@@ -105,7 +105,7 @@ class ListsController < ApplicationController
    # either it should return a partial, nothing, or always return something
    def child_list
     @list = List.find(params[:id])
-    render :partial => 'lists/list', @list, :params[:cssid => @list.id]
+    render :partial => 'lists/list', :@list => @list, :params => {:cssid => @list.id}
    end
    
    private
