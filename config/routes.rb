@@ -11,6 +11,8 @@ Tascit::Application.routes.draw do
         post 'sort'
       end
   end
+  match "listchildren/:id" => 'lists#show_children'
+  
   resources :owners
   # The priority is based upon order of creation:
   # first created -> highest priority.
