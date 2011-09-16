@@ -29,25 +29,25 @@ function MakeOrSubmitTaskForm() {
 	    if ($('#taskName').val().length) {
 			var task_name = $('#taskName').val();
 			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
-			$('#tasklist').append(ref);
+			$('#list_tasklist').append(ref);
 			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
-	    var curx = $('#newTask').offset().left;
+	        var curx = $('#newTask').offset().left;
 			var cury = $('#newTask').offset().top;
 			try {
-				var newx=$('#tasklist li:last').offset().left;
-	      var newy=$('#tasklist li:last').offset().top;
+				var newx=$('#list_tasklist li:last').offset().left;
+	      var newy=$('#list_tasklist li:last').offset().top;
 			}
 			catch (err) {
 				if(err.name == 'TypeError'){
-					var newx=$('#tasklist').offset().left;
-		      var newy=$('#tasklist').offset().top;
-			  }
+				    var newx=$('#list_tasklist').offset().left;
+		            var newy=$('#list_tasklist').offset().top;
+			    }
 				else throw(err);
 			}
       ref.css({"position": "absolute","left":curx+"px", "top":cury+"px"})
       .animate({"top":newy+"px","left":newx+"px"}, 500, function() { 
           ref.remove();
-          $("#tasklist").append(ref);
+          $("#list_tasklist").append(ref);
           ref.removeAttr('style');
       });
 MakeSortable(); //may not be necessary
@@ -74,7 +74,7 @@ $(document).ready(function(){
 })
 
 function MakeSortable(){
-	$('#tasklist').sortable({
+	$('#list_tasklist').sortable({
 		axis: 'y',
 		dropOnEmpty: false,
 		cursor: 'crosshair',
