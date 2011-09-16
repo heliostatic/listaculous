@@ -101,8 +101,7 @@ class ListsController < ApplicationController
      render :nothing => true
    end
    
-   # this method needs to be actually written, but not right now.
-   # either it should return a partial, nothing, or always return something
+   # TODO: Add a respond to block for JSON to give a consumer friendly response for those using the API
    def child_list
     @list = List.find(params[:id])
     render :partial => 'lists/list', :@list => @list, :params => {:cssid => @list.id} if @list.has_children?

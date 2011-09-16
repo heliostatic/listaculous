@@ -1,15 +1,10 @@
-function makeListFromJSON(json) {
-	var thelist = $('<ul></ul>');
-}
-
-function fetchChildren(list_id) {
-	var uri = '/lists/' + list_id;
+function FetchChildren(list_id) {
+	var uri = '/listchildren/' + list_id;
 	$.ajax({
 		type:'GET',
 		url: uri,
-		dataType: 'json',
 		success: function(data, textStatus, jqXHR) {
-			
+			alert(data)
 		}
 	});
 }
