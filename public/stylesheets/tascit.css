@@ -15,14 +15,14 @@ li {
 	font-size:1.4em;
 }
 #breadcrumbs li:after {
-	content:">";
+	content:" > ";
 }
 
 #lists .numbers {
     display:inline;
 }
 
-.task.finished {
+li.task.finished {
     text-decoration:line-through;
 }
 
