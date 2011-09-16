@@ -86,8 +86,8 @@ class ListsController < ApplicationController
   
   def finish
     @task = List.tasks[params[:id]]
-    new = {:status => true}
-    @task.update_attributes(new)
+    new_status = {:status => true}
+    @task.update_attributes(new_status)
 
     respond_to do |format|
       format.js
