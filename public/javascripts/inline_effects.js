@@ -1,6 +1,6 @@
 function CreateTask(ref,  name, parentlist_id, owner_id) {
-	var ldata = { 'name':name, 'parentlist_id':parentlist_id, 'owner_id':owner_id, 'status':0}
-  $.ajax({
+   var ldata = { 'name':name, 'parentlist_id':parentlist_id, 'owner_id':owner_id, 'status':0}
+   $.ajax({
    url:'/lists',
    data:{'list':ldata},
    beforeSend: function(req) {
@@ -19,38 +19,40 @@ function CreateTask(ref,  name, parentlist_id, owner_id) {
   });
 }
 
-function MakeOrSubmitTaskForm() {
+function MakeOrSubmitTaskForm(parentlist_id) {
     if ($("#newTask").length ==0) {
 		$('#createPrompt').css('display', 'none');
 		$('#createPrompt').after('<div id="newTask"><input type="text" id="taskName"/></div>');
 		$("#taskName")[0].focus();			
 	}
 	else  {
+	    var parentlist = '#list_' + parentlist_id;
 	    if ($('#taskName').val().length) {
 			var task_name = $('#taskName').val();
 			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
-			$('#list_tasklist').append(ref);
+			$(parentlist).append(ref);
 			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
+			
 	        var curx = $('#newTask').offset().left;
 			var cury = $('#newTask').offset().top;
 			try {
-				var newx=$('#list_tasklist li:last').offset().left;
-	      var newy=$('#list_tasklist li:last').offset().top;
+				var newx=$(parentlist + ' li:last').offset().left;
+	            var newy=$(parentlist + ' li:last').offset().top;
 			}
 			catch (err) {
 				if(err.name == 'TypeError'){
-				    var newx=$('#list_tasklist').offset().left;
-		            var newy=$('#list_tasklist').offset().top;
+				    var newx=$(parentlist).offset().left;
+		            var newy=$(parentlist).offset().top;
 			    }
 				else throw(err);
 			}
       ref.css({"position": "absolute","left":curx+"px", "top":cury+"px"})
       .animate({"top":newy+"px","left":newx+"px"}, 500, function() { 
           ref.remove();
-          $("#list_tasklist").append(ref);
+          $(parentlist).append(ref);
           ref.removeAttr('style');
       });
-MakeSortable(); //may not be necessary
+      MakeSortable(); //may not be necessary
 	    }
 		$('#newTask').remove();
 		$('#createPrompt').css('display', 'block');
@@ -61,7 +63,7 @@ MakeSortable(); //may not be necessary
 $("body").live('keypress', function(e){
 	if (e.keyCode == 13) {
 	    e.preventDefault(); //prevents sending the carriage return to the text field.
-        MakeOrSubmitTaskForm();
+        MakeOrSubmitTaskForm($('ul.tasklist').attr('data-listid'));
 	}
 	
 });
@@ -70,11 +72,11 @@ $("#createPrompt").live('click', function(){
 });
 
 $(document).ready(function(){
-	MakeSortable();
+	MakeSortable($('.tasklist')[0]);
 })
 
-function MakeSortable(){
-	$('#list_tasklist').sortable({
+function MakeSortable(list){
+	$(list).sortable({
 		axis: 'y',
 		dropOnEmpty: false,
 		cursor: 'crosshair',
@@ -89,6 +91,7 @@ function MakeSortable(){
 			var oldposition = ui.item.attr('oldposition');
 			ui.item.removeAttr('oldposition');
 			var poschange = ui.item.index()-oldposition;
+			var parentlist_id = $(list).attr('data-listid');
 			var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange + '&parent_id='+parentlist_id;//parentlist_id automagic from show.html
 			$.ajax({
 				type: 'post',

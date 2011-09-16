@@ -1,4 +1,4 @@
-<ul id="list_<%= params[:cssid] || @cssid %>">
+<ul class="tasklist" id="list_<%= params[:cssid] || @cssid %>" data-listid="<%= params[:cssid] || @cssid %>">
 <% @list.tasks.each do |t|%>
 		<% if t.completed? %>
 		<li class="task" id="<%= t.id %>">
