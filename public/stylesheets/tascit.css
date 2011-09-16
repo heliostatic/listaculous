@@ -1,7 +1,4 @@
-li {
-	list-style:none;
-}
-
+/* Breadcrumbs and Navigation */
 #breadcrumbs li {
 	display:inline;
 }
@@ -15,16 +12,32 @@ li {
 	font-size:1.4em;
 }
 #breadcrumbs li:after {
-	content:">";
+	content:" > ";
+}
+
+/* Task List Styles */
+
+li {
+	list-style:none;
 }
 
 #lists .numbers {
     display:inline;
 }
 
-.task.finished {
+li.task.finished {
     text-decoration:line-through;
 }
+
+#adder {
+  cursor:pointer;
+}
+
+.listExpander {
+  cursor:pointer;
+}
+
+/* Overlay -- deprecated */ 
 
 .overlay {
     padding:5px;
