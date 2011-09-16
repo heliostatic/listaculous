@@ -102,7 +102,7 @@ class ListsController < ApplicationController
    end
    
    # TODO: Add a respond to block for JSON to give a consumer friendly response for those using the API
-   def child_list
+   def show_children
     @list = List.find(params[:id])
     render :partial => 'lists/list', :@list => @list, :params => {:cssid => @list.id} if @list.has_children?
    end
