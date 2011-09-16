@@ -60,10 +60,20 @@ function MakeOrSubmitTaskForm(parentlist_id) {
 }
 
 
-$('li.task').live({mouseenter: function(e)
+$("body").live('keypress', function(e){
+	if (e.keyCode == 13) {
+  	var parentid = $("#createPrompt").parent().attr('id');
+    MakeOrSubmitTaskForm(parentid);
+    e.preventDefault(); //prevents sending the carriage return to the text field.
+
+	}
+	
+});
+
+$('.task').live({mouseenter: function(e)
     {
         var addel = '<span id="adder">+</span>';
-        if( $(this).children('#createPrompt').length ==0  ) {
+        if( $(this).children('#createPrompt').length == 0 && $(this).parent().children('#createPrompt').length == 0 ) {
             $(this).append(addel);
         }
         
@@ -77,27 +87,19 @@ $('li.task').live({mouseenter: function(e)
 });
 
 $('#adder').live('click', function(e){
-    var parent = $(e.target).parent()
-    var parentid = parent.attr('id');
+    var parent = $(e.target).parent();
     var prompt = $('#createPrompt').detach();
     var targ = parent.children('a');
+    if( targ.length == 0 ) {
+      targ = $('h1');
+    }
     targ.after(prompt);
     prompt.children('input').focus();
     $('#adder').remove();
 });
 
 $("#createPrompt").live('focus', function(){
-    var parentid = $(this).parent().attr('id');
-    MakeOrSubmitTaskForm(parentid);
-});
-
-$("body").live('keypress', function(e){
-	if (e.keyCode == 13) {
-	    var parentid = $("#createPrompt").parent().attr('id');
-        MakeOrSubmitTaskForm(parentid);
-	    e.preventDefault(); //prevents sending the carriage return to the text field.
-	}
-	
+        MakeOrSubmitTaskForm();
 });
 
 $(document).ready(function(){
