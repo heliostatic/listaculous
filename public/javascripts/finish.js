@@ -1,10 +1,10 @@
-function FetchChildren(list_id) {
+function FetchChildren(list_id, el) {
 	var uri = '/listchildren/' + list_id;
 	$.ajax({
 		type:'GET',
 		url: uri,
 		success: function(data, textStatus, jqXHR) {
-			alert(data)
+			$(el).parent().append(data);
 		}
 	});
 }
@@ -23,4 +23,17 @@ $(".task .checker").live("click", function() {
      },
      type: 'PUT', //This won't work in IE6. Sorry IE6, this is the right REST verb.   
     });
+});
+
+$(".listExpander").live('click', function(){
+    var id= $(this).parent().attr('id');
+    if ($(this).parent().hasClass('expanded')) {
+        $(this).parent().children('ul').remove();
+        $(this).parent().removeClass('expanded');
+    }
+    else {
+      FetchChildren(id, this);
+      $(this).parent().addClass('expanded');  
+    }
+    
 });
