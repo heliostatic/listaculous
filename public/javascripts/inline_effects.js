@@ -26,33 +26,38 @@ function MakeOrSubmitTaskForm(parentlist_id) {
 		$("#taskName")[0].focus();			
 	}
 	else  {
-	    var parentlist = '#list_' + parentlist_id;
+		  var parentlistulid = 'list_' + parentlist_id;
+	    var parentlistulcssid = '#' + parentlistulid;
 	    if ($('#taskName').val().length) {
-			var task_name = $('#taskName').val();
-			var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
-			$(parentlist).append(ref);
-			CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
+				var task_name = $('#taskName').val();
+				var ref = $('<li class="task unconfirmed">'+task_name+'</li>');
+				if($(parentlistulcssid).length == 0) {
+					var reful = '<ul id="'+parentlistulid+'"></ul>';
+					$('#'+parentlist_id).append(reful);
+				} 
+				$(parentlistulcssid).append(ref);
+				CreateTask(ref, task_name, parentlist_id, owner_id); // these come from embedded ruby in show.html
 			
-	        var curx = $('#newTask').offset().left;
-			var cury = $('#newTask').offset().top;
-			try {
-				var newx=$(parentlist + ' li:last').offset().left;
-	            var newy=$(parentlist + ' li:last').offset().top;
-			}
-			catch (err) {
-				if(err.name == 'TypeError'){
-				    var newx=$(parentlist).offset().left;
-		            var newy=$(parentlist).offset().top;
-			    }
-				else throw(err);
-			}
-      ref.css({"position": "absolute","left":curx+"px", "top":cury+"px"})
-      .animate({"top":newy+"px","left":newx+"px"}, 500, function() { 
-          ref.remove();
-          $(parentlist).append(ref);
-          ref.removeAttr('style');
-      });
-      MakeSortable(); //may not be necessary
+		    var curx = $('#newTask').offset().left;
+				var cury = $('#newTask').offset().top;
+				try {
+					var newx=$(parentlistulcssid + ' li:last').offset().left;
+		      var newy=$(parentlistulcssid + ' li:last').offset().top;
+				}
+				catch (err) {
+					if(err.name == 'TypeError'){
+					    var newx=$(parentlistulcssid).offset().left;
+			        var newy=$(parentlistulcssid).offset().top;
+				    }
+					else throw(err);
+				}
+	      ref.css({"position": "absolute","left":curx+"px", "top":cury+"px"})
+	      .animate({"top":newy+"px","left":newx+"px"}, 500, function() { 
+	          ref.remove();
+	          $(parentlistulcssid).append(ref);
+	          ref.removeAttr('style');
+	      });
+	      MakeSortable(); //may not be necessary
 	    }
 		$('#newTask').remove();
 		$('#createPrompt').css('display', 'block');
@@ -72,17 +77,22 @@ $("body").live('keypress', function(e){
 
 $('.task').live({mouseenter: function(e)
     {
-        var addel = '<span id="adder">+</span>';
+				$('#adder').remove(); //beats figuring it out
+        var addel = '<span id="adder"> +</span>';
         if( $(this).children('#createPrompt').length == 0 && $(this).parent().children('#createPrompt').length == 0 ) {
-            $(this).append(addel);
+            $(this).children('a').after(addel);
         }
         
         e.stopPropagation();
     },
     mouseleave: function(e)
     {
-        $('#adder').remove();
-        e.stopPropagation();
+				$('#adder').remove();
+				var parentbottom = $(e.target).parent().parent().offset().top + $(e.target).parent().parent().outerHeight();
+				if(e.pageY < parentbottom) {
+				$(e.target).parent().parent().trigger('mouseenter');
+			}
+       // e.stopPropagation();
     }
 });
 
