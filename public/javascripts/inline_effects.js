@@ -57,7 +57,7 @@ function MakeOrSubmitTaskForm(parentlist_id) {
 	          $(parentlistulcssid).append(ref);
 	          ref.removeAttr('style');
 	      });
-	      MakeSortable(); //may not be necessary
+	      MakeSortable($(parentlistulcssid)); //may not be necessary
 	    }
 		$('#newTask').remove();
 		$('#createPrompt').css('display', 'block');
@@ -117,23 +117,28 @@ $(document).ready(function(){
 })
 
 function MakeSortable(list){
+	var container = $(list).parent();
 	$(list).sortable({
 		axis: 'y',
 		dropOnEmpty: false,
 		cursor: 'crosshair',
 		items: 'li',
 		opacity: 0.4,
+		placeholder: "field_with_errors",
 		scroll: true,
+		tolerance: "pointer",
+		containment: container,
 		start: function(e, ui){
 			var pos = ui.item.index();
 			ui.item.attr('oldposition', pos);
 		},
 		update: function(e, ui){
+			//check to see if parent is different, act accordingly
 			var oldposition = ui.item.attr('oldposition');
 			ui.item.removeAttr('oldposition');
 			var poschange = ui.item.index()-oldposition;
 			var parentlist_id = $(list).attr('data-listid');
-			var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange + '&parent_id='+parentlist_id;//parentlist_id automagic from show.html
+			var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange + '&parent_id='+parentlist_id;
 			$.ajax({
 				type: 'post',
 				data: thedata,
