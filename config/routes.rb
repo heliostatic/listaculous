@@ -5,7 +5,6 @@ Tascit::Application.routes.draw do
 	match "/signout" => "sessions#destroy", :as => :signout
 	match "/signin" => "sessions#new", :as => :signin
 	
-	resources :tasks
   resources :lists do
       collection do
         post 'sort'
