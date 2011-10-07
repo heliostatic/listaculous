@@ -35,27 +35,24 @@ class List < ActiveRecord::Base
   
   def movedown (n)
     n.times do
-      nextlist = self.higher_item or self
-      self.swap_position(nextlist)
-      nextlist.save
+      self.move_lower
     end
     self.save
   end
   
   def moveup (n)
     n.times do
-      prevlist = self.lower_item or self
-      self.swap_position(prevlist)
-      prevlist.save
+      self.move_higher
     end
     self.save
   end
   
   def move (delta)
     if delta > 0 then
-      self.moveup delta
+      self.movedown delta
     else
-      self.movedown delta.abs
+      self.moveup delta.abs
     end
   end
+  
 end

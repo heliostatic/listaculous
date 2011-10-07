@@ -62,8 +62,12 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
 
     respond_to do |format|
-      if @list.update_attributes({:status => params[:status]})
-        format.html { redirect_to(@list, :notice => 'List was successfully updated.') }
+      if params[:poschange] and (params[:old_position].to_i + 1) == @list.position # old_position is 0 indexed
+        @list.move(params[:poschange].to_i)
+        format.html { redirect_to(@list, :notice => "List was successfully updated.") }
+        format.xml  { head :ok }
+      elsif @list.update_attributes({:status => params[:status]}) # position didn't change
+        format.html { redirect_to(@list, :notice => "List was successfully updated.") }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -92,13 +96,6 @@ class ListsController < ApplicationController
     respond_to do |format|
       format.js
     end
-   end
-   
-   def sort
-     @list = List.find(params[:id])
-     delta = params[:poschange].to_i
-     @list.move(delta)
-     render :nothing => true
    end
    
    # TODO: Add a respond to block for JSON to give a consumer friendly response for those using the API

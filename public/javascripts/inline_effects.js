@@ -130,24 +130,34 @@ function MakeSortable(list){
 		containment: container,
 		start: function(e, ui){
 			var pos = ui.item.index();
+			var oldparent = ui.item.parent();
 			ui.item.attr('oldposition', pos);
+			ui.item.attr('oldparent', oldparent.attr('id'));
 		},
 		update: function(e, ui){
 			//check to see if parent is different, act accordingly
 			var oldposition = ui.item.attr('oldposition');
+			var oldparent = ui.item.attr('oldparent');
 			ui.item.removeAttr('oldposition');
-			var poschange = ui.item.index()-oldposition;
-			var parentlist_id = $(list).attr('data-listid');
-			var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange + '&parent_id='+parentlist_id;
-			$.ajax({
-				type: 'post',
-				data: thedata,
-				dataType: 'script',
-				complete: function(request){
+			ui.item.removeAttr('oldparent');
+			if(oldparent == ui.item.parent().attr('id')){
+				var poschange = ui.item.index()-oldposition;
+				var parentlist_id = $(list).attr('data-listid');
+				var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange + '&parent_id='+parentlist_id + '&old_position=' + oldposition;
+				$.ajax({
+					type: 'put',
+					data: thedata,
+					dataType: 'script',
+					complete: function(request){
 					
-				$(ui.item).effect('highlight');
-			},
-			url: '/lists/sort'})
+					$(ui.item).effect('highlight');
+				},
+				url: '/lists/'+ui.item.attr('id')})
+			}
+			//the list was moved to a new parent
+			else {
+				
+			}
 		}
 	});
 }
