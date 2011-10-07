@@ -132,14 +132,16 @@ function MakeSortable(list){
 		start: function(e, ui){
 			var pos = ui.item.index();
 			ui.item.attr('oldposition', pos);
+			ui.item.attr('oldparent',ui.item.parent().attr('data-listid'));
 		},
 		update: function(e, ui){
 			//check to see if parent is different, act accordingly
 			var oldposition = ui.item.attr('oldposition');
-			var oldparent = $(list).attr('data-listid');
+			var oldparent = ui.item.attr('oldparent');
 			var newparent = ui.item.parent().attr('data-listid');
+			//we use oldparent and oldposition attributes because once the item is dropped we have no information about it's past location
 			ui.item.removeAttr('oldposition');
-			
+			ui.item.removeAttr('oldparent');
 			if(oldparent == newparent){
 				var poschange = ui.item.index()-oldposition;
 				var casetype = 'sort_in_place';
