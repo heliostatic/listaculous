@@ -67,6 +67,9 @@ class ListsController < ApplicationController
         @list.move(params[:poschange].to_i)
         format.html { redirect_to(@list, :notice => "List was successfully updated.") }
         format.xml  { head :ok }
+      when 'sort_across_lists'
+        # remove from current list
+        # change parent list id
       when 'status'
         if @list.update_attributes({:status => params[:status]}) # position didn't change
           format.html { redirect_to(@list, :notice => "List was successfully updated.") }
