@@ -26,6 +26,7 @@ function MakeOrSubmitTaskForm(parentlist_id) {
 		$("#taskName")[0].focus();			
 	}
 	else  {
+		  //we have ul id and ul css id to distinguish between <li> items and their associated children uls. TODO refactor this.
 		  var parentlistulid = 'list_' + parentlist_id;
 	    var parentlistulcssid = '#' + parentlistulid;
 	    if ($('#taskName').val().length) {
@@ -130,34 +131,34 @@ function MakeSortable(list){
 		containment: container,
 		start: function(e, ui){
 			var pos = ui.item.index();
-			var oldparent = ui.item.parent();
 			ui.item.attr('oldposition', pos);
-			ui.item.attr('oldparent', oldparent.attr('id'));
 		},
 		update: function(e, ui){
 			//check to see if parent is different, act accordingly
 			var oldposition = ui.item.attr('oldposition');
-			var oldparent = ui.item.attr('oldparent');
+			var oldparent = $(list).attr('data-listid');
+			var newparent = ui.item.parent().attr('data-listid');
 			ui.item.removeAttr('oldposition');
-			ui.item.removeAttr('oldparent');
-			if(oldparent == ui.item.parent().attr('id')){
+			
+			if(oldparent == newparent){
 				var poschange = ui.item.index()-oldposition;
-				var parentlist_id = $(list).attr('data-listid');
-				var thedata = 'id=' + ui.item.attr('id') + '&poschange=' + poschange + '&parent_id='+parentlist_id + '&old_position=' + oldposition;
-				$.ajax({
-					type: 'put',
-					data: thedata,
-					dataType: 'script',
-					complete: function(request){
-					
+				var casetype = 'sort_in_place';
+			//the list was moved to a new parent
+			}
+			else {
+				var casetype = "sort_across_lists"; 
+			}
+			var thedata = 'id=' + ui.item.attr('id') + '&old_parent=' + oldparent + '&poschange=' + poschange  + '&new_parent=' + newparent + '&new_position=' + ui.item.index() + '&old_position=' + oldposition + '&case=' + casetype;
+			$.ajax({
+				type: 'put',
+				data: thedata,
+				dataType: 'script',
+				complete: function(request){
+				
 					$(ui.item).effect('highlight');
 				},
-				url: '/lists/'+ui.item.attr('id')})
-			}
-			//the list was moved to a new parent
-			else {
-				
-			}
+				url: '/lists/'+ui.item.attr('id')
+			});
 		}
 	});
 }

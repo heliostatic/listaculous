@@ -60,15 +60,21 @@ class ListsController < ApplicationController
   # PUT /lists/1.xml
   def update
     @list = List.find(params[:id])
-
     respond_to do |format|
-      if params[:poschange] and (params[:old_position].to_i + 1) == @list.position # old_position is 0 indexed
+      action_type = params[:case]
+      case action_type
+      when 'sort_in_place'
         @list.move(params[:poschange].to_i)
         format.html { redirect_to(@list, :notice => "List was successfully updated.") }
         format.xml  { head :ok }
-      elsif @list.update_attributes({:status => params[:status]}) # position didn't change
-        format.html { redirect_to(@list, :notice => "List was successfully updated.") }
-        format.xml  { head :ok }
+      when 'status'
+        if @list.update_attributes({:status => params[:status]}) # position didn't change
+          format.html { redirect_to(@list, :notice => "List was successfully updated.") }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @list.errors, :status => :unprocessable_entity }
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @list.errors, :status => :unprocessable_entity }

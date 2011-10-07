@@ -11,7 +11,7 @@ function FetchChildren(list_id, el) {
 
 $(".task .checker").live("click", function() {
     var status = ($(this)[0].checked)?1:0;
-    var tdata = { 'id':$(this).parent()[0].id , 'status':status }
+    var tdata = { 'id':$(this).parent()[0].id , 'status':status, 'case':'status' }
     var el = this;
     $.ajax({
      url:'/lists/' + $(this).parent()[0].id,
