@@ -68,8 +68,9 @@ class ListsController < ApplicationController
         format.html { redirect_to(@list, :notice => "List was successfully updated.") }
         format.xml  { head :ok }
       when 'sort_across_lists'
-        # remove from current list
-        # insert_at(params[:new_position].to_i + 1)
+        @list.remove_from_list
+        @list.parentlist_id = params[:new_parent]
+        @list.insert_at(params[:new_position].to_i + 1)
       when 'status'
         if @list.update_attributes({:status => params[:status]}) # position didn't change
           format.html { redirect_to(@list, :notice => "List was successfully updated.") }
