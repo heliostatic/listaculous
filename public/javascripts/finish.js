@@ -4,22 +4,27 @@ function FetchChildren(list_id, el, recurse) {
 		type:'GET',
 		url: uri,
 		success: function(data, textStatus, jqXHR) {
-			$(el).parent().append(data);
-			if(recurse) {
-			    var expanders = $(el).parent().children('.listExpander');
+		    $(el).parent().append(data);
+		    if(recurse) {
+			    var expanders = $(el).siblings('ul').children('li').children('.listExpander');
 			    for (var i=0; i<expanders.length; i++) {
-			        var ell = expanders[i];
-			        var list_id = ell.parent().attr('id');
-			        FetchChildren(list_id, ell, true);  
+			        var childel = $(expanders[i]);
+    			    var list_id = childel.parent().attr('id');
+    			    FetchChildren(list_id, childel, true);  
 			    }
 			}
+			
 		}
 	});
 }
 
-$('#expandAll').click(function(){
-   var list_id = this.parent().attr('id');
-   FetchChildren(list_id, this, true); 
+$('#expandAll').live('click',function(){
+    var expanders = $('.listExpander');
+	for (var i=0; i<expanders.length; i++) {
+	        var childel = $(expanders[i]);
+		    var list_id = childel.parent().attr('id');
+		    FetchChildren(list_id, childel, true);  
+	}
 });
 
 $(".task .checker").live("click", function() {
