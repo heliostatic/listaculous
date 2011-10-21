@@ -19,6 +19,7 @@ function FetchChildren(list_id, el, recurse) {
 }
 
 $('#expandAll').live('click',function(){
+  CollapseAll();
     var expanders = $('.listExpander');
 	for (var i=0; i<expanders.length; i++) {
 	        var childel = $(expanders[i]);
@@ -26,6 +27,20 @@ $('#expandAll').live('click',function(){
 		    FetchChildren(list_id, childel, true);  
 	}
 });
+
+$('#collapseAll').live('click',function(){
+  CollapseAll();
+});
+
+function CollapseAll(){
+    var expanders = $('.listExpander');
+	for (var i=0; i<expanders.length; i++) {
+	      var childel = $(expanders[i]);
+	      if(childel.parent().attr('class','expanded')) {
+  		    childel.click();
+		    }
+	}
+}
 
 $(".task .checker").live("click", function() {
     var status = ($(this)[0].checked)?1:0;
