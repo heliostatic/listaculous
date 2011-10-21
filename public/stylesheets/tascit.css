@@ -34,6 +34,24 @@ li.task.finished {
 
 #adder {
   cursor:pointer;
+  display:inline-block;
+  background:#29E314;
+  border-radius:8px;
+  color:#fff;
+  width:16px;
+  height:16px;
+  text-align:center;
+  padding:0px;
+  font-size:1.2em;
+  line-height:1em;
+  font-weight:heavy;
+  margin-left:5px;
+  padding:0px;
+  vertical-align:middle;
+  font-family: 'Quicksand', sans-serif;
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #D1FFCC;
 }
 
 .listExpander {
