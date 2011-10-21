@@ -1,13 +1,26 @@
-function FetchChildren(list_id, el) {
+function FetchChildren(list_id, el, recurse) {
 	var uri = '/listchildren/' + list_id;
 	$.ajax({
 		type:'GET',
 		url: uri,
 		success: function(data, textStatus, jqXHR) {
 			$(el).parent().append(data);
+			if(recurse) {
+			    var expanders = $(el).parent().children('.listExpander');
+			    for (var i=0; i<expanders.length; i++) {
+			        var el = expanders[i];
+    			    var list_id = el.parent().attr('id');
+    			    FetchChildren(list_id, el, true);  
+			    }
+			}
 		}
 	});
 }
+
+$('#expandAll').click(function(){
+   var list_id = this.parent().attr('id');
+   FetchChildren(list_id, this, true); 
+});
 
 $(".task .checker").live("click", function() {
     var status = ($(this)[0].checked)?1:0;
