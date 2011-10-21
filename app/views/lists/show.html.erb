@@ -6,22 +6,21 @@
   <%= javascript_include_tag "jquery-ui-1.8.15.min.js" %>
   <%= javascript_include_tag "finish.js" %>
 <% end %>
-<p id="notice"><%= notice %></p>
 
-<ul id="breadcrumbs">
-<li><%= link_to @list.owner.name, @list.owner %></li>
-<% @list.lineage.each do |p| %>
-	<li><%= link_to p.name, p %></li>
-<% end %>
+<ul class="breadcrumb">
+  <li><%= link_to @list.owner.name, @list.owner %> <span class="divider">/</span></li>
+  <% @list.lineage.each do |p| %>
+  	<li><%= link_to p.name, p %> <span class="divider">/</span> </li>
+  <% end %>
 </ul>
 <%= @list.description %>
 
 <div id=<%= @list.id %>>
-<button type="button" id="expandAll">Expand All</button><button type="button" id="collapseAll">Collapse All</button>
 
-<h1 class="task"><a><%= @list.name %></a></h1>
+<h1 class="task"><a><%= @list.name %></a> <button type="button" id="expandAll" class="btn small">Expand All</button>  <button type="button" id="collapseAll" class="btn small">Collapse All</button></h1>
 
   	<div id="createPrompt" class="ghost"><input type="text" placeholder="Create new task"></input></div>
+  	
 
 		<%= render 'lists/list', :@list => @list, :params => {:cssid => @list.id} %>
 </div>

@@ -14,15 +14,28 @@
   </script>
 </head>
 <body>
-<div id="user_nav">
-<% if current_user  %>
-	Welcome <%= current_user.name %>
-	<%= link_to "Sign Out", signout_path %>
-<% else  %>
-	<%= link_to "Sign in with Twitter", "/auth/twitter" %>
-<% end %>
-</div>
+<div class="container">
+    <div class="topbar" >
+      <div class="topbar-inner">
+        <div class="container">
+        <%= link_to "Tascit", root_url, :class => "brand"%>
+        <div id="signin" class="pull-right">
+        <ul>
+          <% if current_user  %>
+          	<li><p>Welcome <%= current_user.name %></p></li>
+          	<li><%= link_to "Sign Out", signout_path %></li>
+          <% else  %>
+          	<li><%= link_to "Sign in with Twitter", "/auth/twitter" %></li>
+          <% end %>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% if notice %>
+      <p id="notice" class="alert-message success"><%= notice %></p>
+    <% end %>
 <%= yield %>
-
+</div>
 </body>
 </html>

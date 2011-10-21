@@ -1,4 +1,7 @@
 /* Breadcrumbs and Navigation */
+body {
+  padding-top: 50px
+}
 #breadcrumbs li {
 	display:inline;
 }
@@ -35,6 +38,14 @@ li.task.finished {
 
 .listExpander {
   cursor:pointer;
+}
+
+div > ul {
+  margin:0;
+}
+
+#createPrompt, #newTask {
+  margin-bottom:2em;
 }
 
 /* Overlay -- deprecated */ 
