@@ -8,9 +8,9 @@ function FetchChildren(list_id, el, recurse) {
 			if(recurse) {
 			    var expanders = $(el).parent().children('.listExpander');
 			    for (var i=0; i<expanders.length; i++) {
-			        var el = expanders[i];
-    			    var list_id = el.parent().attr('id');
-    			    FetchChildren(list_id, el, true);  
+			        var ell = expanders[i];
+			        var list_id = ell.parent().attr('id');
+			        FetchChildren(list_id, ell, true);  
 			    }
 			}
 		}
