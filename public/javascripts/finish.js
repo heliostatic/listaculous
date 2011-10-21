@@ -1,3 +1,8 @@
+function ExpandList(list_id, el, recurse) {
+    FetchChildren(list_id, el, recurse);
+    $(el).parent().addClass('expanded');
+}
+
 function FetchChildren(list_id, el, recurse) {
 	var uri = '/listchildren/' + list_id;
 	$.ajax({
@@ -10,7 +15,7 @@ function FetchChildren(list_id, el, recurse) {
 			    for (var i=0; i<expanders.length; i++) {
 			        var childel = $(expanders[i]);
     			    var list_id = childel.parent().attr('id');
-    			    FetchChildren(list_id, childel, true);  
+    			    ExpandList(list_id, childel, true);  
 			    }
 			}
 			
@@ -24,7 +29,7 @@ $('#expandAll').live('click',function(){
 	for (var i=0; i<expanders.length; i++) {
 	        var childel = $(expanders[i]);
 		    var list_id = childel.parent().attr('id');
-		    FetchChildren(list_id, childel, true);  
+		    ExpandList(list_id, childel, true);  
 	}
 });
 
@@ -65,7 +70,7 @@ $(".listExpander").live('click', function(){
         $(this).parent().removeClass('expanded');
     }
     else {
-      FetchChildren(id, this);
+      ExpandList(id, this);
       $(this).parent().addClass('expanded');  
     }
     
