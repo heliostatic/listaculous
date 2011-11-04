@@ -8,7 +8,7 @@
 			<%= check_box_tag "checkbox_#{t.id}", true, checked = true, {:class => 'checker'} %>
 		<% end %>
 		<% if t.has_children? %>
-			<span class="listExpander">§</span>
+			<span class="listExpander"></span>
 		<% end %>
 		<%= link_to t.name , t %>
 	</li>

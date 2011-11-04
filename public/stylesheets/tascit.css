@@ -22,14 +22,19 @@ body {
 
 li {
 	list-style:none;
+	position:relative;
 }
 
 #lists .numbers {
     display:inline;
 }
 
-li.task.finished {
+li.task.finished > a {
     text-decoration:line-through;
+}
+
+ul.tasklist {
+	margin-left:13px;
 }
 
 #adder {
@@ -56,6 +61,20 @@ li.task.finished {
 
 .listExpander {
   cursor:pointer;
+	position:absolute;
+	left:-13px;
+	transition: transform .1s ease-in;
+	-moz-transition: -moz-transform .1s ease-in;
+	-webkit-transition: -webkit-transform .1s ease-in;
+}
+.listExpander:after {
+	content:"▶";
+}
+
+li.expanded .listExpander {
+	left:-15px;
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
 }
 
 div > ul {
