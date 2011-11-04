@@ -132,11 +132,13 @@ function MakeSortable(list) {
         dropOnEmpty: false,
         cursor: 'crosshair',
         items: 'li',
+				helper: 'clone',
+				forceHelperSize: true ,
         opacity: 0.4,
-        placeholder: "field_with_errors",
+				toleranceElement: '> a',
+        placeholder: "alert-message success",
         scroll: true,
         tolerance: "pointer",
-        containment: container,
         start: function (e, ui) {
             var pos = ui.item.index();
             ui.item.attr('oldposition', pos);

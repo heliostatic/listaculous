@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 	<% if not params[:owner_id] %>
@@ -25,12 +25,7 @@
 	    <%= f.hidden_field :owner_id, {:value => params[:owner_id]} %>
 		</div>
 	<% end %>
-	<% if not params[:parentlist_id] %>
-  	<div class="field">
-  	  <%= f.label :parentlist_id %><br />
-  	  <%= f.text_field :parentlist_id %>
-  	</div>
-  <% else %>
+  <% if params[:parentlist_id] %>
   	<div class="field">
       	<%= f.hidden_field :list_id, {:value => params[:list_id]} %>
   	</div>
