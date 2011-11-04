@@ -76,7 +76,12 @@ li.expanded .listExpander {
 	transform: rotate(90deg);
 	-webkit-transform: rotate(90deg);
 }
-
+input.checker {
+	margin-right:5px;
+}
+.tasklist .renderbug {
+	margin-right:4px
+}
 div > ul {
   margin:0;
 }

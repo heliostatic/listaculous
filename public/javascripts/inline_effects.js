@@ -19,7 +19,7 @@ function CreateTask(ref, name, parentlist_id, owner_id) {
             ref.wrapInner(function () {
                 return '<a href="' + responseObject.getResponseHeader('Location') + '" / >';
             });
-            ref.prepend('<input class="checker" id="checkbox_' + newid + '" type="checkbox">');
+            ref.prepend('<span class="renderbug"><input class="checker" id="checkbox_' + newid + '" type="checkbox"></span>');
             ref.attr('id', newid)
         },
         type: 'POST',
