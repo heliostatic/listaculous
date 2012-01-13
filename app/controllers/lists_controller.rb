@@ -61,7 +61,7 @@ class ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     respond_to do |format|
-      action_type = params[:case]
+      action_type = params[:list][:case] 
       case action_type
       when 'sort_in_place'
         @list.move(params[:poschange].to_i)
@@ -72,8 +72,9 @@ class ListsController < ApplicationController
         @list.parentlist_id = params[:new_parent]
         @list.insert_at(params[:new_position].to_i + 1)
       when 'status'
-        if @list.update_attributes({:status => params[:status]}) # position didn't change
+        if @list.update_attributes({:status => params[:list][:status]}) # position didn't change
           format.html { redirect_to(@list, :notice => "List was successfully updated.") }
+          format.js {render :text => "$('#' + #{@list.id}).toggleClass('finished');" }
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }

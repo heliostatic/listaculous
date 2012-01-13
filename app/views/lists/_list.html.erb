@@ -1,16 +1,21 @@
 <ul class="tasklist" id="list_<%= params[:cssid] || @cssid %>" data-listid="<%= params[:cssid] || @cssid %>">
-<% @list.tasks.each do |t|%>
-		<% if t.completed? %>
-		<li class="task" id="<%= t.id %>">
-		    <%= check_box_tag "checkbox_#{t.id}", true, checked = false, {:class => 'checker'} %>			
-		<% else %>
-		<li class="task finished" id="<%= t.id %>">
-			<%= check_box_tag "checkbox_#{t.id}", true, checked = true, {:class => 'checker'} %>
-		<% end %>
-		<% if t.has_children? %>
-			<span class="listExpander"></span>
-		<% end %>
-		<%= link_to t.name , t %>
-	</li>
+
+<% @list.children.each do |t|%>
+		<%= form_for t, :as => :list, :remote => true do |f|%>
+			<%=f.hidden_field :case, :value=> 'status' %>
+			<% if t.completed? %>
+			<li class="task" id="<%= t.id %>">
+			    <%= f.check_box :status,  {:class => 'checker'}   %>			
+			<% else %>
+			<li class="task finished" id="<%= t.id %>">
+			    <%= f.check_box :status,  {:class => 'checker'} %>
+			<% end %>
+			<% if t.has_children? %>
+				<span class="listExpander"></span>
+			<% end %>
+			<%= link_to t.name , t %>
+		</li>
+	<% end %>
 <% end %>
+
 </ul>

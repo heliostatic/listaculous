@@ -5,8 +5,8 @@ function init() {
             MakeOrSubmitTaskForm(parentid);
             e.preventDefault(); //prevents sending the carriage return to the text field.
         }
-
     });
+    
     $('.task').live({
         mouseenter: function (e) {
             $('#adder').remove(); //beats figuring it out
@@ -14,7 +14,6 @@ function init() {
             if ($(this).children('#createPrompt').length == 0 && $(this).parent().children('#createPrompt').length == 0) {
                 $(this).children('a').after(addel);
             }
-
             e.stopPropagation();
         },
         mouseleave: function (e) {
