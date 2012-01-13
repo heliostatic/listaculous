@@ -1,3 +1,49 @@
+function init() {
+    $("body").live('keypress', function (e) {
+        if (e.keyCode == 13) {
+            var parentid = $("#createPrompt").parent().attr('id');
+            MakeOrSubmitTaskForm(parentid);
+            e.preventDefault(); //prevents sending the carriage return to the text field.
+        }
+
+    });
+    $('.task').live({
+        mouseenter: function (e) {
+            $('#adder').remove(); //beats figuring it out
+            var addel = '<span id="adder"> +</span>';
+            if ($(this).children('#createPrompt').length == 0 && $(this).parent().children('#createPrompt').length == 0) {
+                $(this).children('a').after(addel);
+            }
+
+            e.stopPropagation();
+        },
+        mouseleave: function (e) {
+            $('#adder').remove();
+            var parentbottom = $(e.target).parent().parent().offset().top + $(e.target).parent().parent().outerHeight();
+            if (e.pageY < parentbottom) {
+                $(e.target).parent().parent().trigger('mouseenter');
+            }
+            // e.stopPropagation();
+        }
+    });
+
+    $('#adder').live('click', function (e) {
+        var parent = $(e.target).parent();
+        var prompt = $('#createPrompt').detach();
+        var targ = parent.children('a');
+        if (targ.length == 0) {
+            targ = $('h1');
+        }
+        targ.after(prompt);
+        prompt.children('input').focus();
+        $('#adder').remove();
+    });
+
+    $("#createPrompt").live('focus', function () {
+        MakeOrSubmitTaskForm();
+    });
+}
+
 function CreateTask(ref, name, parentlist_id, owner_id) {
     var ldata = {
         'name': name,
@@ -76,53 +122,13 @@ function MakeOrSubmitTaskForm(parentlist_id) {
 }
 
 
-$("body").live('keypress', function (e) {
-    if (e.keyCode == 13) {
-        var parentid = $("#createPrompt").parent().attr('id');
-        MakeOrSubmitTaskForm(parentid);
-        e.preventDefault(); //prevents sending the carriage return to the text field.
-    }
 
-});
 
-$('.task').live({
-    mouseenter: function (e) {
-        $('#adder').remove(); //beats figuring it out
-        var addel = '<span id="adder"> +</span>';
-        if ($(this).children('#createPrompt').length == 0 && $(this).parent().children('#createPrompt').length == 0) {
-            $(this).children('a').after(addel);
-        }
 
-        e.stopPropagation();
-    },
-    mouseleave: function (e) {
-        $('#adder').remove();
-        var parentbottom = $(e.target).parent().parent().offset().top + $(e.target).parent().parent().outerHeight();
-        if (e.pageY < parentbottom) {
-            $(e.target).parent().parent().trigger('mouseenter');
-        }
-        // e.stopPropagation();
-    }
-});
 
-$('#adder').live('click', function (e) {
-    var parent = $(e.target).parent();
-    var prompt = $('#createPrompt').detach();
-    var targ = parent.children('a');
-    if (targ.length == 0) {
-        targ = $('h1');
-    }
-    targ.after(prompt);
-    prompt.children('input').focus();
-    $('#adder').remove();
-});
-
-$("#createPrompt").live('focus', function () {
-    MakeOrSubmitTaskForm();
-});
-
-$(document).ready(function () {
+$(function () {
     MakeSortable($('.tasklist')[0]);
+    init();
 })
 
 function MakeSortable(list) {
