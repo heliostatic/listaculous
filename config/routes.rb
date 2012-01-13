@@ -1,20 +1,22 @@
 Listaculous::Application.routes.draw do
-	root :to => "sessions#new"
-	
-	match "/auth/:provider/callback" => "sessions#create"
-	match "/signout" => "sessions#destroy", :as => :signout
-	match "/signin" => "sessions#new", :as => :signin
-	
-  resources :lists do
-      collection do
-        post 'sort'
-      end
-  end
-  match "listchildren/:id" => 'lists#show_children'
-  
-  resources :owners
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  
+  root :to => 'sessions#new'
+  
+  match 'auth/:provider/callback' => 'sessions#create'
+  match 'signout' => 'sessions#destroy', :as => :signout
+  match 'signin' => 'sessions#new', :as => :signin
+  
+  resources :owners
+  
+  resources :lists do
+    collection do
+      post 'sort'
+    end
+  end
+  
+  match 'listchildren/:id' => 'lists#show_children'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
@@ -62,7 +64,7 @@ Listaculous::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

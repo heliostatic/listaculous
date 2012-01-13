@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1'
 gem 'acts_as_list', :git => 'https://github.com/swanandp/acts_as_list.git'
 gem 'omniauth'
+gem 'omniauth-twitter'
 gem "jquery-rails"
 # gem 'jquery-rails', '>= 1.0.12'
 
