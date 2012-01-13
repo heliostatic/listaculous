@@ -5,7 +5,7 @@ class Owner < ActiveRecord::Base
 	  create! do |owner|
 		  owner.provider = auth["provider"]
 		  owner.uid = auth["uid"]
-		  owner.name = auth["user_info"]["name"]
+		  owner.name = auth["info"]["name"]
 		end
   end
   
