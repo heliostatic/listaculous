@@ -5,6 +5,7 @@ gem 'acts_as_list', :git => 'https://github.com/swanandp/acts_as_list.git'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem "jquery-rails"
+gem "sass"
 # gem 'jquery-rails', '>= 1.0.12'
 
 # Bundle edge Rails instead:

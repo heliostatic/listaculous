@@ -10,7 +10,7 @@ function init() {
     $('.task').live({
         mouseenter: function (e) {
             $('#adder').remove(); //beats figuring it out
-            var addel = '<span id="adder"> +</span>';
+            var addel = '<span id="adder"></span>';
             if ($(this).children('#createPrompt').length == 0 && $(this).parent().children('#createPrompt').length == 0) {
                 $(this).children('a').after(addel);
             }
