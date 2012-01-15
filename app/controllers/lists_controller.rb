@@ -74,7 +74,7 @@ class ListsController < ApplicationController
       when 'status'
         if @list.update_attributes({:status => params[:list][:status]}) # position didn't change
           format.html { redirect_to(@list, :notice => "List was successfully updated.") }
-          format.js {render :text => "$('#' + #{@list.id}).toggleClass('finished');" }
+          format.js   { render :text => "$('#' + #{@list.id}).toggleClass('finished');" }
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }

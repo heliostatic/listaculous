@@ -1,0 +1,6 @@
+<%= form_for List.new, :as => :list, :remote => true do |f|%>
+	<%= text_field(:list, :name) %>
+	<%=f.hidden_field :parentlist_id, :value=> @list.id %>
+	<%=f.hidden_field :owner_id, :value=> @list.owner.id %>
+	<%=f.hidden_field :status, :value=> 0 %>
+<% end %>
