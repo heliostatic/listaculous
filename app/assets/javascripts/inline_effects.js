@@ -30,10 +30,6 @@ function init() {
         $('#list_parentlist_id').val($(this).parent().attr('id'))
         $('#adder').remove();
     });
-
-    /*$("#createPrompt").live('focus', function () {
-        MakeOrSubmitTaskForm();
-    });*/
 }
 
 $(function () {
