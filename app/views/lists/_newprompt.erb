@@ -1,6 +1,7 @@
 <%= form_for List.new, :as => :list,  :remote => true, :html=> {:id => "createPrompt"} do |f|%>
-	<%= text_field :list, :name, {:placeholder => "Create new task"} %>
+	<%= text_field :list, :name, {:placeholder => "Create new task", :value=>''} %>
 	<%=f.hidden_field :parentlist_id, :value=> @list.id %>
 	<%=f.hidden_field :owner_id, :value=> @list.owner.id %>
 	<%=f.hidden_field :status, :value=> 0 %>
+	<%=hidden_field :extra, :tstamp, :value=> 0 %>
 <% end %>

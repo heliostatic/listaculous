@@ -44,11 +44,12 @@ class ListsController < ApplicationController
   # POST /lists.xml
   def create
     @list = List.new(params[:list])
-
+    @tstamp = params[:extra][:tstamp]
     respond_to do |format|
       if @list.save
         format.html { redirect_to(@list, :notice => 'List was successfully created.') }
         format.xml  { render :xml => @list, :status => :created, :location => @list  }
+        format.js 
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @list.errors, :status => :unprocessable_entity }

@@ -31,23 +31,21 @@ function focusOrSubmit() {
             input.blur();
         }
         else {
+            var tstamp = new Date().getTime()
+            $('#extra_tstamp').val(tstamp);
             input.parent().submit();
             parid = $('#list_parentlist_id').val();
             //find or create the UL to hold the sublist.
             var reful = $('#list_'+parid)[0] ? $('#list_'+parid) : $('#'+parid).append('<ul id="list_'+parid+'"></ul>');
-            var tlist = $('<li class="temporary">'+input.val()+'</li>')
+            var tlist = $('<li class="temporary" id="t-'+tstamp+'">'+input.val()+'</li>')
             reful.append(tlist);
-            var curx = $('#list_name').offset().left;
-            var cury = $('#list_name').offset().top;
-            var newx = $(reful).offset().left;
-            var newy = $(reful).offset().top + $(reful).outerHeight() -tlist.outerHeight();
             tlist.css({
                 "position": "absolute",
-                "left": curx + "px",
-                "top": cury + "px"
+                "left": $('#list_name').offset().left + "px",
+                "top": $('#list_name').offset().top + "px"
             }).animate({
-                "top": newy + "px",
-                "left": newx + "px"
+                "top": $(reful).offset().top + $(reful).outerHeight() + "px",
+                "left": $(reful).offset().left + "px"
             }, 500, function () {
                 tlist.removeAttr('style');
             });

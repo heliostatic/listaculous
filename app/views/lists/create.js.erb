@@ -1,0 +1,2 @@
+var el = $('<%= form_for @list, :remote => true do |f|%> <%=f.hidden_field :case, :value=> 'status' %> <li class="task" id="<%= @list.id %>"> <%= f.check_box :status,  {:class => "checker"}   %> <%= link_to @list.name , @list %> </li> <% end %>');
+$('#t-<%= @tstamp %>').replaceWith(el);
