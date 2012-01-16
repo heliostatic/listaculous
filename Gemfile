@@ -11,8 +11,12 @@ gem "sass"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "pg", :group => :production
-gem "sqlite3-ruby", :group => :development
+gem "sqlite3-ruby"
+
+
+group :production do
+	gem "pg"
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
