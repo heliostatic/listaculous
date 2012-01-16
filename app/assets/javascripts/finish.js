@@ -36,16 +36,16 @@ function focusOrSubmit() {
             input.parent().submit();
             parid = $('#list_parentlist_id').val();
             //find or create the UL to hold the sublist.
-            var reful = $('#list_'+parid)[0] ? $('#list_'+parid) : $('#'+parid).append('<ul id="list_'+parid+'"></ul>');
+            var reful = $('#list_'+parid)[0] ? $('#list_'+parid) : $('#'+parid).append('<ul id="list_'+parid+'"></ul>').children('ul');
             var tlist = $('<li class="temporary" id="t-'+tstamp+'">'+input.val()+'</li>')
             reful.append(tlist);
             tlist.css({
                 "position": "absolute",
-                "left": $('#list_name').offset().left + "px",
-                "top": $('#list_name').offset().top + "px"
+                "left": $('#list_name').position().left + "px",
+                "top": $('#list_name').position().top + "px"
             }).animate({
-                "top": $(reful).offset().top + $(reful).outerHeight() + "px",
-                "left": $(reful).offset().left + "px"
+                "top": $(reful).position().top + $(reful).outerHeight() + "px",
+                "left": $(reful).position().left + $(reful).css('margin-left').replace("px", "") + "px"
             }, 500, function () {
                 tlist.removeAttr('style');
             });

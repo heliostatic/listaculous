@@ -19,7 +19,7 @@ function init() {
     });
 
     $('#adder').live('click', function (e) {
-        var parent = $(e.target).parent();
+        var parent = $(this).parent();
         var prompt = $('#createPrompt').detach();
         var targ = parent.children('a');
         if (targ.length == 0) {
@@ -27,6 +27,7 @@ function init() {
         }
         targ.after(prompt);
         prompt.children('input').focus();
+        $('#list_parentlist_id').val($(this).parent().attr('id'))
         $('#adder').remove();
     });
 
