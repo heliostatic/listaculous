@@ -16,7 +16,12 @@ class List < ActiveRecord::Base
 			list = List.find(list.parentlist_id)
 			parents << list
 		end
-		parents.reverse!
+		
+		if parents.length > 0
+  		parents.reverse!.slice(1..-1)
+    else
+      parents
+    end
   end
   
 	def children
