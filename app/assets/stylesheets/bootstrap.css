@@ -570,9 +570,6 @@ pre {
 /* Forms.less
  * Base styles for various input types, form layouts, and states
  * ------------------------------------------------------------- */
-form {
-  margin-bottom: 18px;
-}
 fieldset {
   margin-bottom: 18px;
   padding-top: 18px;

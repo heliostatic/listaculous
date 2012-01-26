@@ -62,12 +62,18 @@ class ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     respond_to do |format|
-      action_type = params[:list][:case] 
+      if params.has_key? [:list] 
+        action_type = params[:list][:case]
+      else
+        action_type = params[:case]
+      end
+
       case action_type
       when 'sort_in_place'
         @list.move(params[:poschange].to_i)
         format.html { redirect_to(@list, :notice => "List was successfully updated.") }
         format.xml  { head :ok }
+        format.js { render :text => "yep"}
       when 'sort_across_lists'
         @list.remove_from_list
         @list.parentlist_id = params[:new_parent]

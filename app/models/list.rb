@@ -3,6 +3,7 @@ class List < ActiveRecord::Base
   acts_as_list :scope => :parentlist
   has_many :tasks, :class_name => 'List', :foreign_key => "parentlist_id", :order => "position"
   belongs_to :parentlist, :class_name => 'List'
+  default_scope order("position asc") 
   
   def completed?
     self.status == 0
@@ -53,11 +54,13 @@ class List < ActiveRecord::Base
   end
   
   def move (delta)
+    logger.info self.position
     if delta > 0 then
       self.movedown delta
     else
       self.moveup delta.abs
     end
+    logger.info self.position
   end
   
 end

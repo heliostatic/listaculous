@@ -1,5 +1,5 @@
 function init() {    
-    $('.task').live({
+    $('ul .task').live({
         mouseenter: function (e) {
             $('#adder').remove(); //beats figuring it out
             var addel = '<span id="adder"></span>';
@@ -52,20 +52,20 @@ function MakeSortable(list) {
         scroll: true,
         tolerance: "pointer",
         start: function (e, ui) {
-            var pos = ui.item.index();
+            var pos = ui.item.parent().index();
             ui.item.attr('oldposition', pos);
-            ui.item.attr('oldparent', ui.item.parent().attr('data-listid'));
+            ui.item.attr('oldparent', ui.item.closest('ul').attr('data-listid'));
         },
         update: function (e, ui) {
             //check to see if parent is different, act accordingly
             var oldposition = ui.item.attr('oldposition');
             var oldparent = ui.item.attr('oldparent');
-            var newparent = ui.item.parent().attr('data-listid');
+            var newparent = ui.item.closest('ul').attr('data-listid');
             //we use oldparent and oldposition attributes because once the item is dropped we have no information about it's past location
             ui.item.removeAttr('oldposition');
             ui.item.removeAttr('oldparent');
             if (oldparent == newparent) {
-                var poschange = ui.item.index() - oldposition;
+                var poschange = ui.item.parent().index() - oldposition;
                 var casetype = 'sort_in_place';
                 //the list was moved to a new parent
             } else {
